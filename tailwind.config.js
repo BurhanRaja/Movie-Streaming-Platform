@@ -9,6 +9,9 @@ module.exports = {
     fontFamily: {
       'roboto': ["Roboto", "HelveticaNeue-Light", "sans-serif"],
     },
+    backgroundImage: {
+      'hero-pattern': "url('/images/moviename.webp')",
+    }
   },
   plugins: [],
 };
