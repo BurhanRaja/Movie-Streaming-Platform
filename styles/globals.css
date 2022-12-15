@@ -11,3 +11,7 @@ body {
 .carouselContainer {
     @apply h-[28rem]
 }
+
+.image-gradient {
+background: linear-gradient(to right, rgb(15 23 42) 0%, transparent 23%, transparent 100%);
+}
