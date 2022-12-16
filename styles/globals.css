@@ -15,3 +15,45 @@ body {
 .image-gradient {
 background: linear-gradient(to right, rgb(15 23 42) 0%, transparent 23%, transparent 100%);
 }
+
+.prevBtn {
+    background-color: linear-gradient(to right, rgb(15 23 42) 0%, transparent 100%);
+}
+
+.nextBtn {
+    background-color: linear-gradient(to left, rgb(15 23 42) 0%, transparent 100%);
+}
+
+.swiper {
+    width: 90%;
+    height: 25rem;
+  }
+
+  .swiper-button-next {
+    background-image: url("/images/chevron-right.svg");
+    background-repeat: no-repeat;
+    background-size: 60% auto;
+    background-position: center;
+    position: absolute;
+}
+
+  .swiper-button-next::after {
+    display: none;
+  }
+
+  .swiper-button-prev {
+    background-image: url("/images/chevron-left.svg");
+    background-repeat: no-repeat;
+    background-size: 60% auto;
+    background-position: center;
+    left: -10px;
+    position: absolute;
+  }
+  
+  .swiper-button-prev::after {
+    display: none;
+  }
+
+  .swiper-button-next, .swiper-rtl .swiper-button-prev {
+    right: 0px;
+  }
