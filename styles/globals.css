@@ -1,59 +1,92 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body { 
-    @apply bg-slate-800
+body {
+  @apply bg-slate-800;
 }
 
 .carouselContainer {
-    @apply h-[28rem]
+  @apply h-[28rem];
 }
 
 .image-gradient {
-background: linear-gradient(to right, rgb(15 23 42) 0%, transparent 23%, transparent 100%);
+  background: linear-gradient(
+    to right,
+    rgb(15 23 42) 0%,
+    transparent 23%,
+    transparent 100%
+  );
 }
 
-.prevBtn {
-    background-color: linear-gradient(to right, rgb(15 23 42) 0%, transparent 100%);
+.card-background-gradient {
+  background: linear-gradient(
+    to top,
+    rgb(15 23 42) 0%,
+    rgb(19, 27, 44) 70%,
+    rgba(29, 38, 63, 0.123) 100%
+  );
 }
 
-.nextBtn {
-    background-color: linear-gradient(to left, rgb(15 23 42) 0%, transparent 100%);
+.card:hover {
+  scale: 1.15;
 }
 
-.swiper {
-    width: 90%;
-    height: 25rem;
-  }
-
-  .swiper-button-next {
-    background-image: url("/images/chevron-right.svg");
-    background-repeat: no-repeat;
-    background-size: 60% auto;
-    background-position: center;
-    position: absolute;
+.card-gradient {
+  background: linear-gradient(
+    to left,
+    rgb(26, 26, 26) 0%,
+    transparent 23%,
+    transparent 100%
+  );
+  height: auto;
 }
 
-  .swiper-button-next::after {
-    display: none;
-  }
+.swiper-3d,
+.swiper-3d.swiper-css-mode .swiper-wrapper {
+  perspective: 40px;
+}
 
-  .swiper-button-prev {
-    background-image: url("/images/chevron-left.svg");
-    background-repeat: no-repeat;
-    background-size: 60% auto;
-    background-position: center;
-    left: -10px;
-    position: absolute;
-  }
-  
-  .swiper-button-prev::after {
-    display: none;
-  }
+.swiper-slide {
+  transition: all 2s ease-in-out;
+}
 
-  .swiper-button-next, .swiper-rtl .swiper-button-prev {
-    right: 0px;
-  }
+.swiper-button-next {
+  background-image: url("/images/chevron-right.svg");
+  background-repeat: no-repeat;
+  background-size: 60% auto;
+  background-position: center;
+  position: absolute;
+  display: none;
+}
+
+.swiper-button-next::after {
+  display: none;
+}
+
+.swiper-button-prev {
+  background-image: url("/images/chevron-left.svg");
+  background-repeat: no-repeat;
+  background-size: 60% auto;
+  background-position: center;
+  left: -10px;
+  position: absolute;
+  display: none;
+}
+
+.swiper:hover,
+.swiper-button-next,
+.swiper-button-prev {
+  display: block;
+}
+
+.swiper-button-prev::after {
+  display: none;
+}
+
+.swiper-button-next,
+.swiper-rtl .swiper-button-prev {
+  right: 0px;
+}
