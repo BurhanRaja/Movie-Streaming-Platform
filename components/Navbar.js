@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineSearch } from "react-icons/ai";
+import Link from "next/link";
 
 const NavItems = () => {
   let navItems = ["TV", "Movies", "Sports", "Disney+"];
@@ -52,9 +53,9 @@ function Navbar() {
             <GiHamburgerMenu className="hover:cursor-pointer text-xl text-white" />
           </span>
           <span className="mx-3 pb-3">
-            <a href="/">
+            <Link href="/">
               <Image src="/logo.svg" width={120} height={120} alt="Logo" />
-            </a>
+            </Link>
           </span>
           <NavItems />
         </div>

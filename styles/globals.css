@@ -8,9 +8,6 @@ body {
   @apply bg-slate-800;
 }
 
-.carouselContainer {
-  @apply h-[28rem];
-}
 
 .image-gradient {
   background: linear-gradient(
@@ -56,10 +53,9 @@ body {
 .swiper-button-next {
   background-image: url("/images/chevron-right.svg");
   background-repeat: no-repeat;
-  background-size: 60% auto;
+  background-size: 80% auto;
   background-position: center;
   position: absolute;
-  display: none;
 }
 
 .swiper-button-next::after {
@@ -69,11 +65,10 @@ body {
 .swiper-button-prev {
   background-image: url("/images/chevron-left.svg");
   background-repeat: no-repeat;
-  background-size: 60% auto;
+  background-size: 80% auto;
   background-position: center;
   left: -10px;
   position: absolute;
-  display: none;
 }
 
 .swiper:hover,
@@ -89,4 +84,13 @@ body {
 .swiper-button-next,
 .swiper-rtl .swiper-button-prev {
   right: 0px;
+}
+
+.moviedetail-image-gradient{
+    background: linear-gradient(
+    to right,
+    rgb(15 23 42) 0%,
+    transparent 23%,
+    transparent 100%
+  );
 }

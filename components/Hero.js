@@ -3,37 +3,46 @@ import Image from "next/image";
 import { Autoplay, EffectCoverflow, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 // import styles bundle
+import Link from "next/link";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 
-function HeroCard() {
+function HeroCard({ id, title, description, image, genres, date }) {
   return (
-    <div className="bg-slate-900 to-transparent w-[93%] h-[100%] rounded-lg mx-auto ">
-      <div className="content flex justify-start">
-        <div className="text w-[46%] py-16 pl-16">
-          <p className="text-white text-3xl font-extrabold mb-2">Chhichhore</p>
-          <p className="text-slate-400 font-semibold mb-2 text-lg">
-            Hindi . Drama . 2019
-          </p>
-        </div>
-        <div className="image w-40% z-10 relative">
-          <Image
-            src="/images/moviename.webp"
-            className="rounded-lg"
-            width={765}
-            height={100}
-            alt="img"
-          />
-          <div class="absolute top-0 right-0 bottom-0 left-0 w-[100%] h-[100%] overflow-hidden image-gradient"></div>
+    <Link href={`/movies/${id}`}>
+      <div className="bg-slate-900 to-transparent w-[93%] h-[100%] rounded-lg mx-auto ">
+        <div className="content flex justify-start">
+          <div className="text w-[46%] py-16 pl-16">
+            <p className="text-white text-3xl font-extrabold mb-2">{title}</p>
+            <p className="text-slate-400 font-semibold mb-2 text-lg">
+              {genres?.map((el) => {
+                  return (
+                    <span key={el}>{el} . </span>
+                  )
+              })}
+                <span>{date.getFullYear()}</span>
+            </p>
+            <p className="text-slate-200">{description}</p>
+          </div>
+          <div className="image w-40% z-10 relative">
+            <Image
+              src={`https://image.tmdb.org/t/p/original${image}`}
+              className="rounded-lg"
+              width={765}
+              height={100}
+              alt="img"
+            />
+            <div class="absolute top-0 right-0 bottom-0 left-0 w-[100%] h-[100%] overflow-hidden image-gradient"></div>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
-function Hero() {
-  let data = [1, 2, 3, 4, 5, 6];
+function Hero({ data, genres }) {
+  console.log(data);
 
   return (
     <section className="mb-20">
@@ -58,12 +67,27 @@ function Hero() {
         onSwiper={(swiper) => console.log(swiper)}
         style={{ perspective: "17px", width: "100%", height: "25rem" }}
       >
-        {data?.map((el) => {
-          return (
-            <SwiperSlide key={el} className="transition-all duration-1000">
-              <HeroCard />
-            </SwiperSlide>
-          );
+        {data?.map((el, index) => {
+          if (index <= 9) {
+            return (
+              <SwiperSlide key={el} className="transition-all duration-1000">
+                <HeroCard
+                  key={el.id}
+                  id={el.id}
+                  title={el.title || el.name}
+                  description={el.overview}
+                  image={el.backdrop_path}
+                  genres={
+                    el.genre_ids?.map((el) => {
+                        let sameGenre = genres?.find((elem) => elem.id === el);
+                        return sameGenre.name;
+                    })
+                  }
+                  date={new Date(el.release_date || el.first_air_date)}
+                />
+              </SwiperSlide>
+            );
+          }
         })}
       </Swiper>
     </section>
