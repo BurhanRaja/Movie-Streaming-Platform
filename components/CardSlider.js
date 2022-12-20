@@ -8,9 +8,9 @@ import Link from "next/link";
 import "swiper/css";
 import "swiper/css/free-mode";
 
-const CardDetail = ({ title, description, genres, date }) => {
+const CardDetail = ({ title, description, genres, date, detail }) => {
   return (
-    <div className="absolute top-[45%] px-2 rounded-lg w-[100%] h-[75%] text-xs card-background-gradient text-white opacity-0 group-hover/card:opacity-100 transition-all duration-500">
+    <div className="card-detail absolute bottom-[0%] rounded-lg w-[100%] text-xs card-background-gradient text-white opacity-0 group-hover/card:opacity-100 transition-all duration-500">
       <div className="title">
         <p className="font-bold mb-1">{title}</p>
         <p className="leading-3 mt-1 text-[0.6rem] font-semibold mb-2">
@@ -24,20 +24,22 @@ const CardDetail = ({ title, description, genres, date }) => {
         className="description mt-1 mb-1 text-slate-500 font-bold"
         style={{ fontSize: "0.6rem" }}
       >
-        <p className="leading-3">
-          {description.substr(0, 55)}...
-        </p>
+        <p className="leading-3">{description.substr(0, 55)}...</p>
       </div>
       <div className="btn mt-1">
-        <div>
-          <button
-            className="flex items-center justify-start w-[100%] py-[2px] px-1 hover:bg-slate-700 rounded-sm"
-            style={{ fontSize: "0.65rem" }}
-          >
-            <BsFillPlayFill className="mr-2" />
-            Watch Now
-          </button>
-        </div>
+        {detail.title ? (
+          <div>
+            <button
+              className="flex items-center justify-start w-[100%] py-[2px] px-1 hover:bg-slate-700 rounded-sm"
+              style={{ fontSize: "0.65rem" }}
+            >
+              <BsFillPlayFill className="mr-2" />
+              Watch Now
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
         <div>
           <button
             className="flex items-center justify-start w-[100%] py-[2px] px-1 hover:bg-slate-700 rounded-sm mb-1"
@@ -53,12 +55,11 @@ const CardDetail = ({ title, description, genres, date }) => {
 };
 
 const Card = ({ cardDetail, poster, id, cardGenres }) => {
-  console.log(poster)
   return (
-    <Link href={`/movies/${id}`}>
-      <div className="card group/card w-[9.5rem] h-[12rem] rounded-lg mr-4 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer">
+    <Link href={cardDetail.release_date ? `/movies/${id}` : `/tv/${id}`}>
+      <div className="card group/card w-[9.5rem] h-[100%] rounded-lg mr-4 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer">
         <Image
-          src={poster === null ? "/images/moviename.webp" : `https://image.tmdb.org/t/p/original${poster}`}
+          src={`https://image.tmdb.org/t/p/original${poster}`}
           alt="card"
           width={200}
           height={300}
@@ -70,6 +71,7 @@ const Card = ({ cardDetail, poster, id, cardGenres }) => {
           description={cardDetail.overview}
           genres={cardGenres}
           date={new Date(cardDetail.release_date || cardDetail.first_air_date)}
+          detail={cardDetail}
         />
       </div>
     </Link>
@@ -91,7 +93,6 @@ function CardSlider({ data, genres, type }) {
         mousewheel={true}
         keyboard={true}
         freeMode={true}
-        onSwiper={(swiper) => console.log(swiper)}
         style={{
           perspective: "17px",
           width: "93%",
@@ -101,19 +102,21 @@ function CardSlider({ data, genres, type }) {
         }}
       >
         {data?.map((el) => {
-          return (
-            <SwiperSlide key={el.id}>
-              <Card
-                cardDetail={el}
-                poster={el.poster_path}
-                id={el.id}
-                cardGenres={el.genre_ids?.map((el) => {
-                  let sameGenre = genres?.find((elem) => elem.id === el);
-                  return sameGenre.name;
-                })}
-              />
-            </SwiperSlide>
-          );
+          if (el.poster_path !== null) {
+            return (
+              <SwiperSlide key={el.id}>
+                <Card
+                  cardDetail={el}
+                  poster={el.poster_path}
+                  id={el.id}
+                  cardGenres={el.genre_ids?.map((el) => {
+                    let sameGenre = genres?.find((elem) => elem.id === el);
+                    return sameGenre.name;
+                  })}
+                />
+              </SwiperSlide>
+            );
+          }
         })}
       </Swiper>
       <div className="absolute opacity-0 group-hover/slider:opacity-100 top-0 right-0 h-[85%] w-20 card-gradient z-30"></div>

@@ -41,6 +41,10 @@ body {
   height: auto;
 }
 
+.card-detail {
+  padding: 30px 10px 7px 5px;
+}
+
 .swiper-3d,
 .swiper-3d.swiper-css-mode .swiper-wrapper {
   perspective: 40px;

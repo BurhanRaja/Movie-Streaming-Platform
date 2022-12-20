@@ -7,7 +7,6 @@ const Hero = dynamic(() => import("../components/Hero"), {
 });
 
 export default function Home({ allLatest, genres, popularMovies, popularTV }) {
-  console.log(popularTV);
   return (
     <Layout>
       <main>
@@ -25,7 +24,7 @@ export default function Home({ allLatest, genres, popularMovies, popularTV }) {
 }
 
 export async function getServerSideProps() {
-  // ! Get Genres
+  // Get Genres
   const movieGenreUrl = `${process.env.NEXT_PUBLIC_MOVIE_URL}genre/movie/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
   const tvGenreUrl = `${process.env.NEXT_PUBLIC_MOVIE_URL}genre/tv/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
   // Promise Request
@@ -47,7 +46,7 @@ export async function getServerSideProps() {
     }
   }
 
-  // ! Getting Movies and TV Shows
+  // Getting Latest Movies and TV Shows
   const MovieUrl = (sort_by, with_original_lang, with_watch_providers) =>
     `${process.env.NEXT_PUBLIC_MOVIE_URL}discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&sort_by=${sort_by}&include_adult=false&include_video=false&page=1&with_original_language=${with_original_lang}&with_watch_providers=${with_watch_providers}&watch_region=IN&with_watch_monetization_types=flatrate`;
 
@@ -74,8 +73,7 @@ export async function getServerSideProps() {
     allLatest.push(latestTV[i]);
   }
 
-  // TODO: Popular Shows
-  // TODO: Popular Movies
+  //  Getting Popular Movies and Shows
   const [popularMoviesRes, popularTVRes] = await Promise.all([
     fetch(MovieUrl("popularity.desc", "hi", "122")),
     fetch(TVUrl("popularity.desc", "hi", "122")),
@@ -87,7 +85,36 @@ export async function getServerSideProps() {
   popularMovies = popularMovies.results;
   popularTV = popularTV.results;
 
-  // TODO: Mystery
+  
+  // ? Filter Genres
+  const GenreMovieUrl = (
+    sort_by,
+    genre,
+    with_original_lang,
+    with_watch_providers
+  ) =>
+    `${process.env.NEXT_PUBLIC_MOVIE_URL}discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&sort_by=${sort_by}&include_adult=false&include_video=false&page=1&with_genres=${genre}&with_original_language=${with_original_lang}&with_watch_providers=${with_watch_providers}&watch_region=IN&with_watch_monetization_types=flatrate`;
+
+  const GenreTVUrl = (
+    sort_by,
+    genre,
+    with_original_lang,
+    with_watch_providers
+  ) =>
+    `${process.env.NEXT_PUBLIC_TV_URL}discover/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&sort_by=${sort_by}&include_adult=false&include_video=false&page=1&with_genres=${genre}&with_original_language=${with_original_lang}&with_watch_providers=${with_watch_providers}&watch_region=IN&with_watch_monetization_types=flatrate`;
+
+  // Getting Mystery Movies and TV Shows
+  const [mysteryMoviesRes, mysteryTVRes] = await Promise.all([
+    fetch(GenreMovieUrl("popularity.desc", "9648", "hi", "122")),
+    fetch(GenreTVUrl("popularity.desc", "9648", "hi", "122")),
+  ]);
+  let [mysteryMovies, mysteryTV] = await Promise.all([
+    mysteryMoviesRes.json(),
+    mysteryTVRes.json(),
+  ]);
+  mysteryMovies = mysteryMovies.results;
+  mysteryTV = mysteryTV.results;
+
   // TODO: Superheroes
   // TODO: Best for kids
   // TODO: Drama
