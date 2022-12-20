@@ -10,10 +10,10 @@ import "swiper/css/free-mode";
 
 const CardDetail = ({ title, description, genres, date }) => {
   return (
-    <div className="absolute top-[45%] px-2 rounded-lg w-[100%] text-xs card-background-gradient text-white opacity-0 group-hover/card:opacity-100 transition-all duration-500">
+    <div className="absolute top-[45%] px-2 rounded-lg w-[100%] h-[75%] text-xs card-background-gradient text-white opacity-0 group-hover/card:opacity-100 transition-all duration-500">
       <div className="title">
-        <p className="font-bold">Freddy</p>
-        <p className="leading-3 mt-1 text-[0.55rem] font-semibold">
+        <p className="font-bold mb-1">{title}</p>
+        <p className="leading-3 mt-1 text-[0.6rem] font-semibold mb-2">
           {genres?.map((el) => {
             return <span key={el}>{el} . </span>;
           })}
@@ -21,12 +21,11 @@ const CardDetail = ({ title, description, genres, date }) => {
         </p>
       </div>
       <div
-        className="description mt-1 text-slate-500 font-bold"
+        className="description mt-1 mb-1 text-slate-500 font-bold"
         style={{ fontSize: "0.6rem" }}
       >
         <p className="leading-3">
-          This is a story of blaah blaah More Description is less or it could be
-          less......
+          {description.substr(0, 55)}...
         </p>
       </div>
       <div className="btn mt-1">
@@ -54,11 +53,12 @@ const CardDetail = ({ title, description, genres, date }) => {
 };
 
 const Card = ({ cardDetail, poster, id, cardGenres }) => {
+  console.log(poster)
   return (
     <Link href={`/movies/${id}`}>
       <div className="card group/card w-[9.5rem] h-[12rem] rounded-lg mr-4 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer">
         <Image
-          src={`https://image.tmdb.org/t/p/original${poster}`}
+          src={poster === null ? "/images/moviename.webp" : `https://image.tmdb.org/t/p/original${poster}`}
           alt="card"
           width={200}
           height={300}
@@ -68,7 +68,7 @@ const Card = ({ cardDetail, poster, id, cardGenres }) => {
           key={cardDetail.id}
           title={cardDetail.title || cardDetail.name}
           description={cardDetail.overview}
-          genre={cardGenres}
+          genres={cardGenres}
           date={new Date(cardDetail.release_date || cardDetail.first_air_date)}
         />
       </div>
@@ -77,11 +77,11 @@ const Card = ({ cardDetail, poster, id, cardGenres }) => {
 };
 
 // Main Function
-function CardSlider({ data, genres }) {
+function CardSlider({ data, genres, type }) {
   return (
     <section className="my-4 relative group/slider">
       <p className="card-slider-title w-[93%] mx-auto text-2xl text-white mb-5 font-bold">
-        Latest Trending
+        {type}
       </p>
       <Swiper
         modules={[FreeMode, Mousewheel, Keyboard]}

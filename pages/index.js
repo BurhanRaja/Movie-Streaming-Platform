@@ -6,13 +6,19 @@ const Hero = dynamic(() => import("../components/Hero"), {
   ssr: false,
 });
 
-export default function Home({ allLatest, genres }) {
+export default function Home({ allLatest, genres, popularMovies, popularTV }) {
+  console.log(popularTV);
   return (
     <Layout>
       <main>
         <Hero data={allLatest} genres={genres} />
-        <CardSlider data={allLatest} genres={genres} />
-        <CardSlider />
+        <CardSlider data={allLatest} genres={genres} type="Latest & Trending" />
+        <CardSlider
+          data={popularMovies}
+          genres={genres}
+          type="Popular Movies"
+        />
+        <CardSlider data={popularTV} genres={genres} type="Popular Shows" />
       </main>
     </Layout>
   );
@@ -42,11 +48,6 @@ export async function getServerSideProps() {
   }
 
   // ! Getting Movies and TV Shows
-
-  let sort_by = "release_date.desc";
-  let with_original_lang = "hi";
-  let with_watch_providers = "122";
-
   const MovieUrl = (sort_by, with_original_lang, with_watch_providers) =>
     `${process.env.NEXT_PUBLIC_MOVIE_URL}discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&sort_by=${sort_by}&include_adult=false&include_video=false&page=1&with_original_language=${with_original_lang}&with_watch_providers=${with_watch_providers}&watch_region=IN&with_watch_monetization_types=flatrate`;
 
@@ -55,8 +56,8 @@ export async function getServerSideProps() {
 
   // ? Latest - Movies and TVs
   const [latestMoviesRes, latestTVRes] = await Promise.all([
-    fetch(MovieUrl(sort_by, with_original_lang, with_watch_providers)),
-    fetch(TVUrl(sort_by, with_original_lang, with_watch_providers)),
+    fetch(MovieUrl("release_date.desc", "hi", "122")),
+    fetch(TVUrl("release_date.desc", "hi", "122")),
   ]);
   let [latestMovies, latestTV] = await Promise.all([
     latestMoviesRes.json(),
@@ -75,6 +76,17 @@ export async function getServerSideProps() {
 
   // TODO: Popular Shows
   // TODO: Popular Movies
+  const [popularMoviesRes, popularTVRes] = await Promise.all([
+    fetch(MovieUrl("popularity.desc", "hi", "122")),
+    fetch(TVUrl("popularity.desc", "hi", "122")),
+  ]);
+  let [popularMovies, popularTV] = await Promise.all([
+    popularMoviesRes.json(),
+    popularTVRes.json(),
+  ]);
+  popularMovies = popularMovies.results;
+  popularTV = popularTV.results;
+
   // TODO: Mystery
   // TODO: Superheroes
   // TODO: Best for kids
@@ -86,10 +98,14 @@ export async function getServerSideProps() {
 
   return {
     props: {
+      allLatest: allLatest,
+      genres: genres,
+      // Latest
       latestMovies: latestMovies,
       latestTV: latestTV,
-      allLatest: allLatest,
-      genres: genres
+      // Popular
+      popularMovies: popularMovies,
+      popularTV: popularTV,
     },
   };
 }
