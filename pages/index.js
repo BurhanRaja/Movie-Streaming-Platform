@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import { GiConsoleController } from "react-icons/gi";
 import CardSlider from "../components/CardSlider";
 import Layout from "../components/Layout";
 
@@ -6,7 +7,7 @@ const Hero = dynamic(() => import("../components/Hero"), {
   ssr: false,
 });
 
-export default function Home({ allLatest, genres, popularMovies, popularTV }) {
+export default function Home({ allLatest, genres, popularMovies, popularTV, allMystery }) {
   return (
     <Layout>
       <main>
@@ -18,6 +19,7 @@ export default function Home({ allLatest, genres, popularMovies, popularTV }) {
           type="Popular Movies"
         />
         <CardSlider data={popularTV} genres={genres} type="Popular Shows" />
+        <CardSlider data={allMystery} genres={genres} type="Mystery and Mayham" />
       </main>
     </Layout>
   );
@@ -115,7 +117,19 @@ export async function getServerSideProps() {
   mysteryMovies = mysteryMovies.results;
   mysteryTV = mysteryTV.results;
 
-  // TODO: Superheroes
+    // For getting all the latest movies and TV shows together
+    let allMystery = [];
+    for (let i = 0; i < 10; i++) {
+      if (mysteryMovies[i]) {
+        allMystery.push(mysteryMovies[i]);
+      }
+      allMystery.push(mysteryTV[i]);
+    }
+
+    // Getting Sci-Fi Movies and TV Shows
+    
+
+
   // TODO: Best for kids
   // TODO: Drama
   // TODO: Romance
@@ -133,6 +147,8 @@ export async function getServerSideProps() {
       // Popular
       popularMovies: popularMovies,
       popularTV: popularTV,
+      // Mystery
+      allMystery: allMystery
     },
   };
 }
