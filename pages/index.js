@@ -7,7 +7,15 @@ const Hero = dynamic(() => import("../components/Hero"), {
   ssr: false,
 });
 
-export default function Home({ allLatest, genres, popularMovies, popularTV, allMystery }) {
+export default function Home({
+  allLatest,
+  genres,
+  popularMovies,
+  popularTV,
+  allMystery,
+  allScifi,
+  allDrama
+}) {
   return (
     <Layout>
       <main>
@@ -19,7 +27,13 @@ export default function Home({ allLatest, genres, popularMovies, popularTV, allM
           type="Popular Movies"
         />
         <CardSlider data={popularTV} genres={genres} type="Popular Shows" />
-        <CardSlider data={allMystery} genres={genres} type="Mystery and Mayham" />
+        <CardSlider
+          data={allMystery}
+          genres={genres}
+          type="Mystery and Mayham"
+        />
+        <CardSlider data={allScifi} genres={genres} type="Sci-Fi" />
+        <CardSlider data={allDrama} genres={genres} type="Drama" />
       </main>
     </Layout>
   );
@@ -87,7 +101,6 @@ export async function getServerSideProps() {
   popularMovies = popularMovies.results;
   popularTV = popularTV.results;
 
-  
   // ? Filter Genres
   const GenreMovieUrl = (
     sort_by,
@@ -107,8 +120,8 @@ export async function getServerSideProps() {
 
   // Getting Mystery Movies and TV Shows
   const [mysteryMoviesRes, mysteryTVRes] = await Promise.all([
-    fetch(GenreMovieUrl("popularity.desc", "9648", "hi", "122")),
-    fetch(GenreTVUrl("popularity.desc", "9648", "hi", "122")),
+    fetch(GenreMovieUrl("release_date.desc", "9648", "hi", "122")),
+    fetch(GenreTVUrl("release_date.desc", "9648", "hi", "122")),
   ]);
   let [mysteryMovies, mysteryTV] = await Promise.all([
     mysteryMoviesRes.json(),
@@ -117,25 +130,66 @@ export async function getServerSideProps() {
   mysteryMovies = mysteryMovies.results;
   mysteryTV = mysteryTV.results;
 
-    // For getting all the latest movies and TV shows together
-    let allMystery = [];
-    for (let i = 0; i < 10; i++) {
-      if (mysteryMovies[i]) {
-        allMystery.push(mysteryMovies[i]);
-      }
-      allMystery.push(mysteryTV[i]);
+  // For getting all the latest movies and TV shows together
+  let allMystery = [];
+  for (let i = 0; i < 10; i++) {
+    if (mysteryMovies[i]) {
+      allMystery.push(mysteryMovies[i]);
     }
+    allMystery.push(mysteryTV[i]);
+  }
 
-    // Getting Sci-Fi Movies and TV Shows
-    
+  // Getting Sci-Fi Movies and TV Shows
+  const [scifiMoviesRes, scifiTVRes] = await Promise.all([
+    fetch(GenreMovieUrl("release_date.desc", "878", "en", "122")),
+    fetch(GenreTVUrl("release_date.desc", "10765", "en", "122")),
+  ]);
+  let [scifiMovies, scifiTV] = await Promise.all([
+    scifiMoviesRes.json(),
+    scifiTVRes.json(),
+  ]);
+  scifiMovies = scifiMovies.results;
+  scifiTV = scifiTV.results;
 
+  let allScifi = [];
+  for (let i = 0; i < 16; i++) {
+    if (scifiMovies[i]) {
+      allScifi.push(scifiMovies[i]);
+    }
+    allScifi.push(scifiTV[i]);
+  }
 
-  // TODO: Best for kids
-  // TODO: Drama
-  // TODO: Romance
-  // TODO: Crime
-  // TODO: Comedy
-  // TODO: Documentary
+  // TODO: Best for kids 10762 Only TV
+
+  // TODO: Drama 18 Both
+  const [dramaMoviesRes, dramaTVRes] = await Promise.all([
+    fetch(GenreMovieUrl("release_date.desc", "18", "en", "122")),
+    fetch(GenreTVUrl("release_date.desc", "18", "en", "122")),
+  ]);
+  let [dramaMovies, dramaTV] = await Promise.all([
+    dramaMoviesRes.json(),
+    dramaTVRes.json(),
+  ]);
+  dramaMovies = dramaMovies.results;
+  dramaTV = dramaTV.results;
+
+  console.log(dramaTV.length);
+
+  let allDrama = [];
+  for (let i = 0; i < 16; i++) {
+    allDrama.push(dramaMovies[i]);
+    allDrama.push(dramaTV[i]);
+  }
+
+  // TODO: Romance 10749 Only Movies
+
+  // TODO: Comedy 35 Both
+
+  // TODO: Crime 80 Both
+
+  // TODO: Documentary 99 Both
+
+  // All Genres Both TV and Movies
 
   return {
     props: {
@@ -148,7 +202,11 @@ export async function getServerSideProps() {
       popularMovies: popularMovies,
       popularTV: popularTV,
       // Mystery
-      allMystery: allMystery
+      allMystery: allMystery,
+      // SCI-FI
+      allScifi: allScifi,
+      // Drama
+      allDrama: allDrama
     },
   };
 }
