@@ -1,7 +1,13 @@
 import dynamic from "next/dynamic";
-import { GiConsoleController } from "react-icons/gi";
 import CardSlider from "../components/CardSlider";
 import Layout from "../components/Layout";
+import { getGenreMovie, getGenreTV } from "../services/genres";
+import { getLatestMovies, getLatestShows } from "../services/latest";
+import getAllMysteries from "../services/mystery";
+import { getPopularMovies, getPopularShows } from "../services/popular";
+import getAllSciFi from "../services/sci-fi";
+import { getDramaMovies, getDramaShows } from "../services/drama";
+import CardLoading from "../components/CardLoading";
 
 const Hero = dynamic(() => import("../components/Hero"), {
   ssr: false,
@@ -11,11 +17,13 @@ export default function Home({
   allLatest,
   genres,
   popularMovies,
-  popularTV,
+  popularShows,
   allMystery,
   allScifi,
-  allDrama
+  allDrama,
+  romanceMovies,
 }) {
+
   return (
     <Layout>
       <main>
@@ -26,7 +34,7 @@ export default function Home({
           genres={genres}
           type="Popular Movies"
         />
-        <CardSlider data={popularTV} genres={genres} type="Popular Shows" />
+        <CardSlider data={popularShows} genres={genres} type="Popular Shows" />
         <CardSlider
           data={allMystery}
           genres={genres}
@@ -34,6 +42,7 @@ export default function Home({
         />
         <CardSlider data={allScifi} genres={genres} type="Sci-Fi" />
         <CardSlider data={allDrama} genres={genres} type="Drama" />
+        <CardSlider data={romanceMovies} genres={genres} type="Romance" />
       </main>
     </Layout>
   );
@@ -41,18 +50,9 @@ export default function Home({
 
 export async function getServerSideProps() {
   // Get Genres
-  const movieGenreUrl = `${process.env.NEXT_PUBLIC_MOVIE_URL}genre/movie/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
-  const tvGenreUrl = `${process.env.NEXT_PUBLIC_MOVIE_URL}genre/tv/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
-  // Promise Request
-  const [genreMovieRes, genreTVRes] = await Promise.all([
-    fetch(movieGenreUrl),
-    fetch(tvGenreUrl),
-  ]);
-  // Promise Json
-  let [genreMovie, genreTV] = await Promise.all([
-    genreMovieRes.json(),
-    genreTVRes.json(),
-  ]);
+  let genreMovie = await getGenreMovie();
+  let genreTV = await getGenreTV();
+
   // All Genres
   let genres = [...genreMovie.genres];
   for (let i = 0; i < genreTV.genres.length; i++) {
@@ -62,44 +62,27 @@ export async function getServerSideProps() {
     }
   }
 
-  // Getting Latest Movies and TV Shows
-  const MovieUrl = (sort_by, with_original_lang, with_watch_providers) =>
-    `${process.env.NEXT_PUBLIC_MOVIE_URL}discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&sort_by=${sort_by}&include_adult=false&include_video=false&page=1&with_original_language=${with_original_lang}&with_watch_providers=${with_watch_providers}&watch_region=IN&with_watch_monetization_types=flatrate`;
+  // ? Latest - Movies and Shows
+  let { latestMovies } = await getLatestMovies();
+  let { latestShows } = await getLatestShows();
 
-  const TVUrl = (sort_by, with_original_lang, with_watch_providers) =>
-    `${process.env.NEXT_PUBLIC_TV_URL}discover/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&sort_by=${sort_by}&include_adult=false&include_video=false&page=1&with_original_language=${with_original_lang}&with_watch_providers=${with_watch_providers}&watch_region=IN&with_watch_monetization_types=flatrate`;
-
-  // ? Latest - Movies and TVs
-  const [latestMoviesRes, latestTVRes] = await Promise.all([
-    fetch(MovieUrl("release_date.desc", "hi", "122")),
-    fetch(TVUrl("release_date.desc", "hi", "122")),
-  ]);
-  let [latestMovies, latestTV] = await Promise.all([
-    latestMoviesRes.json(),
-    latestTVRes.json(),
-  ]);
-  latestMovies = latestMovies.results.filter(
+  latestMovies = latestMovies.filter(
     (el) => new Date(el.release_date) < new Date("2023-01-01")
   );
-  latestTV = latestTV.results;
   // For getting all the latest movies and TV shows together
   let allLatest = [];
-  for (let i = 0; i < 16; i++) {
-    allLatest.push(latestMovies[i]);
-    allLatest.push(latestTV[i]);
+  for (let i = 0; i < 8; i++) {
+    if (latestMovies[i] !== undefined) {
+      allLatest.push(latestMovies[i]);
+    }
+    if (latestShows[i] !== undefined) {
+      allLatest.push(latestShows[i]);
+    }
   }
 
-  //  Getting Popular Movies and Shows
-  const [popularMoviesRes, popularTVRes] = await Promise.all([
-    fetch(MovieUrl("popularity.desc", "hi", "122")),
-    fetch(TVUrl("popularity.desc", "hi", "122")),
-  ]);
-  let [popularMovies, popularTV] = await Promise.all([
-    popularMoviesRes.json(),
-    popularTVRes.json(),
-  ]);
-  popularMovies = popularMovies.results;
-  popularTV = popularTV.results;
+  //  ? Popular - Movies and Shows
+  let { popularMovies } = await getPopularMovies();
+  let { popularShows } = await getPopularShows();
 
   // ? Filter Genres
   const GenreMovieUrl = (
@@ -118,70 +101,33 @@ export async function getServerSideProps() {
   ) =>
     `${process.env.NEXT_PUBLIC_TV_URL}discover/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&sort_by=${sort_by}&include_adult=false&include_video=false&page=1&with_genres=${genre}&with_original_language=${with_original_lang}&with_watch_providers=${with_watch_providers}&watch_region=IN&with_watch_monetization_types=flatrate`;
 
-  // Getting Mystery Movies and TV Shows
-  const [mysteryMoviesRes, mysteryTVRes] = await Promise.all([
-    fetch(GenreMovieUrl("release_date.desc", "9648", "hi", "122")),
-    fetch(GenreTVUrl("release_date.desc", "9648", "hi", "122")),
-  ]);
-  let [mysteryMovies, mysteryTV] = await Promise.all([
-    mysteryMoviesRes.json(),
-    mysteryTVRes.json(),
-  ]);
-  mysteryMovies = mysteryMovies.results;
-  mysteryTV = mysteryTV.results;
+  // ? Mystery - Movies and Shows
+  let { allMystery } = await getAllMysteries();
+  
 
-  // For getting all the latest movies and TV shows together
-  let allMystery = [];
-  for (let i = 0; i < 10; i++) {
-    if (mysteryMovies[i]) {
-      allMystery.push(mysteryMovies[i]);
-    }
-    allMystery.push(mysteryTV[i]);
-  }
 
-  // Getting Sci-Fi Movies and TV Shows
-  const [scifiMoviesRes, scifiTVRes] = await Promise.all([
-    fetch(GenreMovieUrl("release_date.desc", "878", "en", "122")),
-    fetch(GenreTVUrl("release_date.desc", "10765", "en", "122")),
-  ]);
-  let [scifiMovies, scifiTV] = await Promise.all([
-    scifiMoviesRes.json(),
-    scifiTVRes.json(),
-  ]);
-  scifiMovies = scifiMovies.results;
-  scifiTV = scifiTV.results;
+  // ? Sci-Fi - Movies and Shows
+  let {allSciFi} = await getAllSciFi();
 
-  let allScifi = [];
-  for (let i = 0; i < 16; i++) {
-    if (scifiMovies[i]) {
-      allScifi.push(scifiMovies[i]);
-    }
-    allScifi.push(scifiTV[i]);
-  }
 
   // TODO: Best for kids 10762 Only TV
 
   // TODO: Drama 18 Both
-  const [dramaMoviesRes, dramaTVRes] = await Promise.all([
-    fetch(GenreMovieUrl("release_date.desc", "18", "en", "122")),
-    fetch(GenreTVUrl("release_date.desc", "18", "en", "122")),
-  ]);
-  let [dramaMovies, dramaTV] = await Promise.all([
-    dramaMoviesRes.json(),
-    dramaTVRes.json(),
-  ]);
-  dramaMovies = dramaMovies.results;
-  dramaTV = dramaTV.results;
-
-  console.log(dramaTV.length);
+  let {allDramaMovies} = await getDramaMovies();
+  let {allDramaShows} = await getDramaShows();
 
   let allDrama = [];
-  for (let i = 0; i < 16; i++) {
-    allDrama.push(dramaMovies[i]);
-    allDrama.push(dramaTV[i]);
+  for (let i = 0; i < 8; i++) {
+    allDrama.push(allDramaMovies[i]);
+    allDrama.push(allDramaShows[i]);
   }
 
   // TODO: Romance 10749 Only Movies
+  const [romanceMoviesRes] = await Promise.all([
+    fetch(GenreMovieUrl("release_date.desc", "10749", "en", "122")),
+  ]);
+  let [romanceMovies] = await Promise.all([romanceMoviesRes.json()]);
+  romanceMovies = romanceMovies.results;
 
   // TODO: Comedy 35 Both
 
@@ -193,20 +139,22 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      allLatest: allLatest,
-      genres: genres,
+      allLatest,
+      genres,
       // Latest
-      latestMovies: latestMovies,
-      latestTV: latestTV,
+      latestMovies,
+      latestShows,
       // Popular
-      popularMovies: popularMovies,
-      popularTV: popularTV,
+      popularMovies,
+      popularShows,
       // Mystery
-      allMystery: allMystery,
+      allMystery,
       // SCI-FI
-      allScifi: allScifi,
+      allScifi: allSciFi,
       // Drama
-      allDrama: allDrama
+      allDrama: allDrama,
+      // Romance
+      romanceMovies: romanceMovies,
     },
   };
 }

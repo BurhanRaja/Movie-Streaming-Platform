@@ -23,7 +23,7 @@ function HeroCard({ id, title, description, image, genres, date }) {
               })}
                 <span>{date.getFullYear()}</span>
             </p>
-            <p className="text-slate-200">{description}</p>
+            <p className="text-slate-200">{description.substr(0, 210)}...</p>
           </div>
           <div className="image w-40% z-10 relative">
             <Image
@@ -33,7 +33,7 @@ function HeroCard({ id, title, description, image, genres, date }) {
               height={100}
               alt="img"
             />
-            <div class="absolute top-0 right-0 bottom-0 left-0 w-[100%] h-[100%] overflow-hidden image-gradient"></div>
+            <div className="absolute top-0 right-0 bottom-0 left-0 w-[100%] h-[100%] overflow-hidden image-gradient"></div>
           </div>
         </div>
       </div>
@@ -42,7 +42,6 @@ function HeroCard({ id, title, description, image, genres, date }) {
 }
 
 function Hero({ data, genres }) {
-  console.log(data);
 
   return (
     <section className="mb-20">
@@ -64,7 +63,6 @@ function Hero({ data, genres }) {
           depth: 5,
           modifier: 1,
         }}
-        onSwiper={(swiper) => console.log(swiper)}
         style={{ perspective: "17px", width: "100%", height: "25rem" }}
       >
         {data?.map((el, index) => {

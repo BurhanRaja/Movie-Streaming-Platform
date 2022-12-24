@@ -60,7 +60,7 @@ function MovieWatchCard() {
             height={100}
             alt="img"
           />
-          <div class="absolute top-0 right-0 bottom-0 left-0 w-[100%] h-[100%] overflow-hidden moviedetail-image-gradient"></div>
+          <div className="absolute top-0 right-0 bottom-0 left-0 w-[100%] h-[100%] overflow-hidden moviedetail-image-gradient"></div>
         </div>
       </div>
     </div>

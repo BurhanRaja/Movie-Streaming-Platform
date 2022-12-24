@@ -1,8 +1,12 @@
 import MovieWatchCard from "../../components/MovieWatchCard";
 import Layout from "../../components/Layout";
+import { useRouter } from "next/router";
 
 
 function MovieDetail() {
+  const {asPath} = useRouter();
+  
+
   return (
     <Layout>
       <MovieWatchCard />
@@ -10,4 +14,9 @@ function MovieDetail() {
   );
 }
 
+const getStaticPaths = () => {
+  
+}
+
 export default MovieDetail;
+
