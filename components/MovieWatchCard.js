@@ -32,21 +32,22 @@ const MoreBtns = () => {
   );
 };
 
-function MovieWatchCard() {
+function MovieWatchCard({ details }) {
+
   return (
-    <div className="bg-slate-900 to-transparent w-[93%] h-[100%] rounded-lg mx-auto relative hover:cursor-pointer">
+    <div className="movie-card-detail to-transparent w-[93%] h-[100%] rounded-lg mx-auto relative hover:cursor-pointer">
       <div className="content flex justify-start">
         <div className="text w-[40%] py-16 pl-16 relative z-50">
-          <p className="text-white text-3xl font-extrabold mb-2">Chhichhore</p>
+          <p className="text-white text-3xl font-extrabold mb-2">
+            {details.title}
+          </p>
           <p className="text-slate-400 font-semibold mb-2 text-lg">
-            Hindi . Drama . 2019
+            {details.genres?.map((el) => {
+              return <span key={el}>{el.name} . </span>;
+            })}
+            <span>{new Date(details.release_date).getFullYear()}</span>
           </p>
-          <p className="text-slate-200">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </p>
+          <p className="text-slate-200">{details.overview}</p>
           <div className="mt-10 w-[100%]  flex justify-center items-center absolute bottom-16">
             <WatchNowBtn />
             <MoreBtns />
@@ -54,7 +55,7 @@ function MovieWatchCard() {
         </div>
         <div className="image w-40% z-10 relative">
           <Image
-            src="/images/moviename.webp"
+            src={`https://image.tmdb.org/t/p/original${details.backdrop_path}`}
             className="rounded-lg"
             width={765}
             height={100}
@@ -65,6 +66,6 @@ function MovieWatchCard() {
       </div>
     </div>
   );
-};
+}
 
 export default MovieWatchCard;

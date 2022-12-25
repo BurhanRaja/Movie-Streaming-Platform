@@ -1,6 +1,12 @@
 import dynamic from "next/dynamic";
 import CardSlider from "../components/CardSlider";
 import Layout from "../components/Layout";
+import { getComedyMovies, getComedyShows } from "../services/comedy";
+import { getCrimeMovies, getCrimeShows } from "../services/crime";
+import {
+  getDocumentaryMovies,
+  getdocumentaryShows,
+} from "../services/documentary";
 import { getDramaMovies, getDramaShows } from "../services/drama";
 import { getGenreMovie, getGenreTV } from "../services/genres";
 import { getLatestMovies, getLatestShows } from "../services/latest";
@@ -8,7 +14,6 @@ import getAllMysteries from "../services/mystery";
 import { getPopularMovies, getPopularShows } from "../services/popular";
 import getRomanticMovies from "../services/romance";
 import getAllSciFi from "../services/sci-fi";
-import { getComedyMovies, getComedyShows } from "../services/comedy";
 
 const Hero = dynamic(() => import("../components/Hero"), {
   ssr: false,
@@ -23,7 +28,9 @@ export default function Home({
   allScifi,
   allDrama,
   romanceMovies,
-  allComedy
+  allComedy,
+  allCrime,
+  allDocumentary,
 }) {
   return (
     <Layout>
@@ -45,6 +52,8 @@ export default function Home({
         <CardSlider data={allDrama} genres={genres} type="Drama" />
         <CardSlider data={romanceMovies} genres={genres} type="Romance" />
         <CardSlider data={allComedy} genres={genres} type="Comedy" />
+        <CardSlider data={allCrime} genres={genres} type="Crime" />
+        <CardSlider data={allDocumentary} genres={genres} type="Documentary" />
       </main>
     </Layout>
   );
@@ -102,9 +111,9 @@ export async function getServerSideProps() {
   // ? Romance - Movies
   let { allRomanticMovies } = await getRomanticMovies();
 
-  // TODO: Comedy 35 Both
-  let {allComedyMovies} = await getComedyMovies();
-  let {allComedyShows} = await getComedyShows();
+  // ? Comedy - Movies and Shows
+  let { allComedyMovies } = await getComedyMovies();
+  let { allComedyShows } = await getComedyShows();
 
   let allComedy = [];
   for (let i = 0; i < 8; i++) {
@@ -112,9 +121,26 @@ export async function getServerSideProps() {
     allComedy.push(allComedyShows[i]);
   }
 
-  // TODO: Crime 80 Both
+  // ? Crime - Movies and Shows
+  const { allCrimeMovies } = await getCrimeMovies();
+  const { allCrimeShows } = await getCrimeShows();
+
+  let allCrime = [];
+  for (let i = 0; i < 8; i++) {
+    allCrime.push(allCrimeMovies[i]);
+    allCrime.push(allCrimeShows[i]);
+  }
 
   // TODO: Documentary 99 Both
+
+  const { allDocumentaryMovies } = await getDocumentaryMovies();
+  const { allDocumentaryShows } = await getdocumentaryShows();
+
+  let allDocumentary = [];
+  for (let i = 0; i < 8; i++) {
+    allDocumentary.push(allDocumentaryMovies[i]);
+    allDocumentary.push(allDocumentaryShows[i]);
+  }
 
   return {
     props: {
@@ -135,7 +161,11 @@ export async function getServerSideProps() {
       // Romance
       romanceMovies: allRomanticMovies,
       // Comedy
-      allComedy
+      allComedy,
+      // Crime
+      allCrime,
+      // Documentary
+      allDocumentary,
     },
   };
 }

@@ -1,5 +1,5 @@
 export const getGenreMovie = async () => {
-  const movieGenreUrl = `${process.env.NEXT_PUBLIC_MOVIE_URL}genre/movie/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+  const movieGenreUrl = `${process.env.NEXT_PUBLIC_URL}genre/movie/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
 
   const response = await fetch(movieGenreUrl);
   // Promise Json
@@ -9,7 +9,7 @@ export const getGenreMovie = async () => {
 };
 
 export const getGenreTV = async () => {
-  const tvGenreUrl = `${process.env.NEXT_PUBLIC_TV_URL}genre/tv/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
+  const tvGenreUrl = `${process.env.NEXT_PUBLIC_URL}genre/tv/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
 
   const response = await fetch(tvGenreUrl);
   // Promise Json

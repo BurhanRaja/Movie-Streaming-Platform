@@ -12,6 +12,7 @@ module.exports = {
     backgroundImage: {
       'hero-pattern': "url('/images/moviename.webp')",
     },
+
   },
   plugins: [],
 };

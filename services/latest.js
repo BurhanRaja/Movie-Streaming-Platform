@@ -13,18 +13,22 @@ export const getLatestMovies = async () => {
     latestMoviesEn = latestMoviesEn.results;
     
     let latestMovies = [];
+    let latestMovieIds = [];
     
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 6; i++) {
         if (latestMoviesHi[i] !== undefined) {
             latestMovies.push(latestMoviesHi[i]);
+            latestMovieIds.push((latestMoviesHi[i]).id);
         }
         if (latestMoviesEn[i] !== undefined) {
             latestMovies.push(latestMoviesEn[i]);
+            latestMovieIds.push((latestMoviesEn[i]).id);
         }
     }
 
     return {
-        latestMovies
+        latestMovies,
+        latestMovieIds
     };
 }
 
@@ -39,17 +43,21 @@ export const getLatestShows = async () => {
     latestShowsEn = latestShowsEn.results;
 
     let latestShows = [];
+    let latestShowIds = [];
     
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 6; i++) {
         if (latestShowsHi[i] !== undefined) {
             latestShows.push(latestShowsHi[i]);
+            latestShowIds.push((latestShowsHi[i]).id);
         }
         if (latestShowsEn[i] !== undefined) {
             latestShows.push(latestShowsEn[i]);
+            latestShowIds.push((latestShowsEn[i]).id);
         }
     }
     
     return {
-        latestShows
+        latestShows,
+        latestShowIds
     };
 }

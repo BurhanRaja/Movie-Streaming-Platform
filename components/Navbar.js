@@ -1,17 +1,49 @@
 import Image from "next/image";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { AiOutlineSearch } from "react-icons/ai";
 import Link from "next/link";
+import { AiOutlineSearch } from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const NavItems = () => {
-  let navItems = ["TV", "Movies", "Sports", "Disney+"];
+  let navItems = [
+    {
+      item: "TV",
+      dropItems: ["Action", "Drama", "Comedy", "Romantic", "Mystery"],
+    },
+    {
+      item: "Movies",
+      dropItems: ["Hindi", "English", "Korean", "Japanese"],
+    },
+    {
+      item: "Sports",
+      dropItems: [],
+    },
+    {
+      item: "Disney+",
+      dropItems: [],
+    },
+  ];
 
   return (
     <ul className="flex justify-center items-center text-white text-base ">
-      {navItems?.map((el, index) => {
+      {navItems?.map((el) => {
         return (
-          <li key={index} className="text-gray-300 mx-4 hover:cursor-pointer">
-            <a>{el}</a>
+          <li
+            key={el.item}
+            className="text-gray-300 px-4 hover:cursor-pointer relative group/item-1 py-4"
+          >
+            <a>{el.item}</a>
+            <ul className="absolute z-50 top-12 left-0 bg-slate-800 rounded-md opacity-0 translate-y-6 group-hover/item-1:opacity-100 group-hover/item-1:translate-y-0 transition-all duration-500">
+              {el.dropItems && el.dropItems?.map((item) => {
+                return (
+                  <li
+                    key={item}
+                    className="w-auto hover:bg-black p-2 rounded-sm px-4 block"
+                  >
+                    <a>{item}</a>
+                  </li>
+                );
+              })}
+            </ul>
           </li>
         );
       })}
@@ -47,7 +79,7 @@ const LoginBtn = () => (
 function Navbar() {
   return (
     <header className="font-roboto">
-      <nav className="bg-slate-800 p-4 flex justify-between items-center">
+      <nav className="bg-slate-900 p-4 flex justify-between items-center">
         <div className="left ml-7 flex justify-start items-center">
           <span className="mx-2">
             <GiHamburgerMenu className="hover:cursor-pointer text-xl text-white" />

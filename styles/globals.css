@@ -5,23 +5,27 @@
 @tailwind utilities;
 
 body {
-  @apply bg-slate-800;
+  @apply bg-slate-900;
 }
 
 
 .image-gradient {
   background: linear-gradient(
     to right,
-    rgb(15 23 42) 0%,
+    rgb(6, 12, 26) 0%,
     transparent 23%,
     transparent 100%
   );
 }
 
+.hero-card {
+  background-color: rgb(6, 12, 26);
+}
+
 .card-background-gradient {
   background: linear-gradient(
     to top,
-    rgb(15 23 42) 0%,
+    rgb(6, 12, 26) 0%,
     rgb(19, 27, 44) 70%,
     rgba(38, 49, 71, 0.062) 100%
   );
@@ -93,8 +97,16 @@ body {
 .moviedetail-image-gradient{
     background: linear-gradient(
     to right,
-    rgb(15 23 42) 0%,
+    rgb(6, 12, 26) 0%,
     transparent 23%,
     transparent 100%
   );
 }
+
+.movie-card-detail{
+  background-color: rgb(6, 12, 26) ;
+}
+
+/* .swiper-slide-active {
+  width: auto;
+} */

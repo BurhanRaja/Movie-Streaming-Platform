@@ -80,12 +80,13 @@ const Card = ({ cardDetail, poster, id, cardGenres }) => {
 
 // Main Function
 function CardSlider({ data, genres, type }) {
+  console.log(data)
   return (
-    <section className="my-4 relative group/slider">
-      <p className="card-slider-title w-[93%] mx-auto text-2xl text-white mb-5 font-bold">
+    <section className="my-4 relative group/slider w-[93%] mx-auto">
+      <p className="card-slider-title text-2xl text-white mb-5 font-bold">
         {type}
       </p>
-      <Swiper
+        <Swiper
         modules={[FreeMode, Mousewheel, Keyboard]}
         slidesPerView={8}
         spaceBetween={30}
@@ -94,8 +95,8 @@ function CardSlider({ data, genres, type }) {
         keyboard={true}
         freeMode={true}
         style={{
+          width: "100%",
           perspective: "17px",
-          width: "93%",
           height: "15rem",
           overflow: "visible",
           zIndex: "10",
