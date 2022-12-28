@@ -7,20 +7,17 @@ import { getGenreMovie } from "../../services/genres";
 import { getLatestMovies, getLatestShows } from "../../services/latest";
 
 function MovieDetail({ movie, videos, images, similar, genreMovie }) {
-  console.log(similar);
   return (
     <Layout>
       <MovieWatchCard details={movie} />
       <Extras videos={videos} images={images} />
       <div className="mt-12">
-        {similar.total_pages === 0 ? (
+        {similar.total_pages === 0 || !similar ? (
           <div className="w-[93%] mx-auto">
             <p className="card-slider-title text-2xl text-white mb-5 font-bold">
               More Like this
             </p>
-            <h2 className=" text-red-500 ">
-              No Recommendations
-            </h2>
+            <h2 className=" text-red-500 ">No Recommendations</h2>
           </div>
         ) : (
           <CardSlider

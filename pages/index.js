@@ -60,9 +60,45 @@ export default function Home({
 }
 
 export async function getServerSideProps() {
+  const [
+    genreMovie,
+    genreTV,
+    latestM,
+    latestS,
+    popularM,
+    popularS,
+    allMystery,
+    allSciFi,
+    allDramaM,
+    allDramaS,
+    allRomanticM,
+    comedyM,
+    comedyS,
+    crimeM,
+    crimeS,
+    documentaryM,
+    documentaryS,
+  ] = await Promise.all([
+    getGenreMovie(),
+    getGenreTV(),
+    getLatestMovies(),
+    getLatestShows(),
+    getPopularMovies(),
+    getPopularShows(),
+    getAllMysteries(),
+    getAllSciFi(),
+    getDramaMovies(),
+    getDramaShows(),
+    getRomanticMovies(),
+    getComedyMovies(),
+    getComedyShows(),
+    getCrimeMovies(),
+    getCrimeShows(),
+    getDocumentaryMovies(),
+    getdocumentaryShows(),
+  ]);
+
   // ? Genres
-  let genreMovie = await getGenreMovie();
-  let genreTV = await getGenreTV();
   let genres = [...genreMovie.genres];
   for (let i = 0; i < genreTV.genres.length; i++) {
     let same = genres.find((el) => el.id === genreTV.genres[i].id);
@@ -71,12 +107,11 @@ export async function getServerSideProps() {
     }
   }
 
-  // ? Latest - Movies and Shows
-  let { latestMovies } = await getLatestMovies();
-  let { latestShows } = await getLatestShows();
-  latestMovies = latestMovies.filter(
+  // ? Latest
+  let latestMovies = latestM.latestMovies.filter(
     (el) => new Date(el.release_date) < new Date("2023-01-01")
   );
+  let latestShows = latestS.latestShows;
   let allLatest = [];
   for (let i = 0; i < 8; i++) {
     if (latestMovies[i] !== undefined) {
@@ -87,79 +122,57 @@ export async function getServerSideProps() {
     }
   }
 
-  //  ? Popular - Movies and Shows
-  let { popularMovies } = await getPopularMovies();
-  let { popularShows } = await getPopularShows();
-
-  // ? Mystery - Movies and Shows
-  let { allMystery } = await getAllMysteries();
-
-  // ? Sci-Fi - Movies and Shows
-  let { allSciFi } = await getAllSciFi();
-
-  // TODO: Best for kids 10762 Only TV
-
-  // ? Drama - Movies and Shows
-  let { allDramaMovies } = await getDramaMovies();
-  let { allDramaShows } = await getDramaShows();
+  // ? Drama
   let allDrama = [];
+  let dramaMovies = allDramaM.allDramaMovies;
+  let dramaShows = allDramaS.allDramaShows;
   for (let i = 0; i < 8; i++) {
-    allDrama.push(allDramaMovies[i]);
-    allDrama.push(allDramaShows[i]);
+    allDrama.push(dramaMovies[i]);
+    allDrama.push(dramaShows[i]);
   }
 
-  // ? Romance - Movies
-  let { allRomanticMovies } = await getRomanticMovies();
-
-  // ? Comedy - Movies and Shows
-  let { allComedyMovies } = await getComedyMovies();
-  let { allComedyShows } = await getComedyShows();
-
+  // ? Comedy
   let allComedy = [];
+  let comedyMovies = comedyM.allComedyMovies;
+  let comedyShows = comedyS.allComedyShows;
   for (let i = 0; i < 8; i++) {
-    allComedy.push(allComedyMovies[i]);
-    allComedy.push(allComedyShows[i]);
+    allComedy.push(comedyMovies[i]);
+    allComedy.push(comedyShows[i]);
   }
 
-  // ? Crime - Movies and Shows
-  const { allCrimeMovies } = await getCrimeMovies();
-  const { allCrimeShows } = await getCrimeShows();
-
+  // ? Crime
   let allCrime = [];
+  let crimeMovies = crimeM.allCrimeMovies;
+  let crimeShows = crimeS.allCrimeShows;
   for (let i = 0; i < 8; i++) {
-    allCrime.push(allCrimeMovies[i]);
-    allCrime.push(allCrimeShows[i]);
+    allCrime.push(crimeMovies[i]);
+    allCrime.push(crimeShows[i]);
   }
 
-  // TODO: Documentary 99 Both
-
-  const { allDocumentaryMovies } = await getDocumentaryMovies();
-  const { allDocumentaryShows } = await getdocumentaryShows();
-
+  // ? Documentary
   let allDocumentary = [];
+  let documentaryMovies = documentaryM.allDocumentaryMovies;
+  let documentaryShows = documentaryS.allDocumentaryShows;
   for (let i = 0; i < 8; i++) {
-    allDocumentary.push(allDocumentaryMovies[i]);
-    allDocumentary.push(allDocumentaryShows[i]);
+    allDocumentary.push(documentaryMovies[i]);
+    allDocumentary.push(documentaryShows[i]);
   }
 
   return {
     props: {
       allLatest,
       genres,
-      // Latest
-      latestMovies,
-      latestShows,
       // Popular
-      popularMovies,
-      popularShows,
+      popularMovies: popularM.popularMovies,
+      popularShows: popularS.popularShows,
       // Mystery
-      allMystery,
+      allMystery: allMystery.allMystery,
       // SCI-FI
-      allScifi: allSciFi,
+      allScifi: allSciFi.allSciFi,
       // Drama
       allDrama: allDrama,
       // Romance
-      romanceMovies: allRomanticMovies,
+      romanceMovies: allRomanticM.allRomanticMovies,
       // Comedy
       allComedy,
       // Crime

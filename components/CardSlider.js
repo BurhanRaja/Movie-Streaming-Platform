@@ -80,7 +80,6 @@ const Card = ({ cardDetail, poster, id, cardGenres }) => {
 
 // Main Function
 function CardSlider({ data, genres, type }) {
-  console.log(data)
   return (
     <section className="my-4 relative group/slider w-[93%] mx-auto">
       <p className="card-slider-title text-2xl text-white mb-5 font-bold">
