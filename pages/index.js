@@ -10,10 +10,10 @@ import {
 import { getDramaMovies, getDramaShows } from "../services/drama";
 import { getGenreMovie, getGenreTV } from "../services/genres";
 import { getLatestMovies, getLatestShows } from "../services/latest";
-import getAllMysteries from "../services/mystery";
+import { getMysteryMovies, getMysteryShows } from "../services/mystery";
 import { getPopularMovies, getPopularShows } from "../services/popular";
 import getRomanticMovies from "../services/romance";
-import getAllSciFi from "../services/sci-fi";
+import { getScifiMovies, getScifiShows } from "../services/sci-fi";
 
 const Hero = dynamic(() => import("../components/Hero"), {
   ssr: false,
@@ -67,8 +67,10 @@ export async function getServerSideProps() {
     latestS,
     popularM,
     popularS,
-    allMystery,
-    allSciFi,
+    allMysteryM,
+    allMysteryS,
+    allScifiM,
+    allScifiS,
     allDramaM,
     allDramaS,
     allRomanticM,
@@ -85,8 +87,10 @@ export async function getServerSideProps() {
     getLatestShows(),
     getPopularMovies(),
     getPopularShows(),
-    getAllMysteries(),
-    getAllSciFi(),
+    getMysteryMovies(),
+    getMysteryShows(),
+    getScifiMovies(),
+    getScifiShows(),
     getDramaMovies(),
     getDramaShows(),
     getRomanticMovies(),
@@ -131,6 +135,24 @@ export async function getServerSideProps() {
     allDrama.push(dramaShows[i]);
   }
 
+  // ? Scifi
+  let allMystery = [];
+  let allMysterMovies = allMysteryM.allMysteryMovies;
+  let allMysteryShows = allMysteryS.allMysteryShows;
+  for (let i = 0; i < 8; i++) {
+    allMystery.push(allMysterMovies[i]);
+    allMystery.push(allMysteryShows[i]);
+  }
+
+  // ? Scifi
+  let allSciFi = [];
+  let allScifiMovies = allScifiM.allSciFiMovies;
+  let allScifiShows = allScifiS.allSciFiShows;
+  for (let i = 0; i < 8; i++) {
+    allSciFi.push(allScifiMovies[i]);
+    allSciFi.push(allScifiShows[i]);
+  }
+
   // ? Comedy
   let allComedy = [];
   let comedyMovies = comedyM.allComedyMovies;
@@ -166,9 +188,9 @@ export async function getServerSideProps() {
       popularMovies: popularM.popularMovies,
       popularShows: popularS.popularShows,
       // Mystery
-      allMystery: allMystery.allMystery,
+      allMystery,
       // SCI-FI
-      allScifi: allSciFi.allSciFi,
+      allScifi: allSciFi,
       // Drama
       allDrama: allDrama,
       // Romance

@@ -2,9 +2,17 @@ import CardSlider from "../../components/CardSlider";
 import Extras from "../../components/Extras";
 import Layout from "../../components/Layout";
 import MovieWatchCard from "../../components/MovieWatchCard";
+import { getComedyMovies } from "../../services/comedy";
+import { getCrimeMovies } from "../../services/crime";
+import { getDocumentaryMovies } from "../../services/documentary";
+import { getDramaMovies } from "../../services/drama";
 import getMovie from "../../services/fetchById/movie";
 import { getGenreMovie } from "../../services/genres";
-import { getLatestMovies, getLatestShows } from "../../services/latest";
+import { getLatestMovies } from "../../services/latest";
+import { getMysteryMovies } from "../../services/mystery";
+import { getPopularMovies } from "../../services/popular";
+import getRomanticMovies from "../../services/romance";
+import { getScifiMovies } from "../../services/sci-fi";
 
 function MovieDetail({ movie, videos, images, similar, genreMovie }) {
   return (
@@ -32,28 +40,95 @@ function MovieDetail({ movie, videos, images, similar, genreMovie }) {
 }
 
 export const getStaticPaths = async () => {
-  const { latestMovieIds } = await getLatestMovies();
-  const { latestShowIds } = await getLatestShows();
+  const [
+    latestMIds,
+    popularMIds,
+    comedyMIds,
+    crimeMIds,
+    documentaryMIds,
+    dramaMIds,
+    mysteryMIds,
+    romanceMIds,
+    scifiMIds,
+  ] = await Promise.all([
+    getLatestMovies(),
+    getPopularMovies(),
+    getComedyMovies(),
+    getCrimeMovies(),
+    getDocumentaryMovies(),
+    getDramaMovies(),
+    getMysteryMovies(),
+    getRomanticMovies(),
+    getScifiMovies(),
+  ]);
 
   let paths = [];
 
-  // LatestMovies
-  for (let i = 0; i < latestMovieIds.length; i++) {
-    paths.push({
-      params: {
-        id: String(latestMovieIds[i]),
-      },
-    });
-  }
+  let pathLatest = latestMIds.latestMovieIds.map((el) => ({
+    params: {
+      id: String(el),
+    },
+  }));
 
-  // LatestShows
-  for (let i = 0; i < latestShowIds.length; i++) {
-    paths.push({
-      params: {
-        id: String(latestShowIds[i]),
-      },
-    });
-  }
+  let pathPopular = popularMIds.popularMoviesIds.map((el) => ({
+    params: {
+      id: String(el),
+    },
+  }));
+
+  let pathComedy = comedyMIds.allComedyMoviesIds.map((el) => ({
+    params: {
+      id: String(el),
+    },
+  }));
+
+  let pathCrime = crimeMIds.allCrimeMoviesIds.map((el) => ({
+    params: {
+      id: String(el),
+    },
+  }));
+
+  let pathDocumentary = documentaryMIds.allDocumentaryMIds.map((el) => ({
+    params: {
+      id: String(el),
+    },
+  }));
+
+  let pathDrama = dramaMIds.allDramaMoviesIds.map((el) => ({
+    params: {
+      id: String(el),
+    },
+  }));
+
+  let pathMystery = mysteryMIds.allMysteryMoviesIds.map((el) => ({
+    params: {
+      id: String(el),
+    },
+  }));
+
+  let pathRomance = romanceMIds.allRomanticMIds.map((el) => ({
+    params: {
+      id: String(el),
+    },
+  }));
+
+  let pathSciFi = scifiMIds.allSciFiMoviesIds.map((el) => ({
+    params: {
+      id: String(el),
+    },
+  }));
+
+  paths = [
+    ...pathLatest,
+    ...pathPopular,
+    ...pathComedy,
+    ...pathCrime,
+    ...pathDocumentary,
+    ...pathDrama,
+    ...pathMystery,
+    ...pathRomance,
+    ...pathSciFi,
+  ];
 
   return {
     paths,

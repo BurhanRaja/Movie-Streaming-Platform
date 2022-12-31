@@ -7,11 +7,14 @@ import Link from "next/link";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
+import { useEffect, useState } from "react";
+import HeroLoading from "./HeroLoading";
 
 function HeroCard({ id, title, description, image, genres, date }) {
+
   return (
     <Link href={`/movies/${id}`}>
-      <div className="hero-card to-transparent w-[93%] h-[100%] rounded-lg mx-auto ">
+      <div className="hero-card to-transparent w-[93%] h-[100%] rounded-lg mx-auto">
         <div className="content flex justify-start">
           <div className="text w-[46%] py-16 pl-16">
             <p className="text-white text-3xl font-extrabold mb-2">{title}</p>
@@ -43,7 +46,15 @@ function HeroCard({ id, title, description, image, genres, date }) {
 
 function Hero({ data, genres }) {
 
-  return (
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (data) {
+      setLoading(false);
+    }
+  }, [data])
+
+  return loading ? <HeroLoading /> : (
     <section className="mb-20">
       <Swiper
         modules={[Navigation, EffectCoverflow, Autoplay]}

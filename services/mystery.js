@@ -1,47 +1,72 @@
 import movieURL from "../utils/movieURL";
 import tvURL from "../utils/tvURL";
 
-const getAllMysteries = async () => {
-    let [responseMovieHi, responseMovieEn, responseShowsHi, responseShowsEn] = await Promise.all([
+
+export const getMysteryMovies = async () => {
+    let [responseMovieHi, responseMovieEn] = await Promise.all([
         fetch(movieURL("popularity.desc", "9648", "", "hi", "122")),
         fetch(movieURL("popularity.desc", "9648", "", "en", "122")),
-        fetch(tvURL("popularity.desc", "9648", "", "hi", "122")),
-        fetch(tvURL("popularity.desc", "9648", "", "en", "122"))
     ]);
 
-    let [mysteryMovieHi, mysteryMovieEn, mysteryShowsHi, mysteryShowsEn] = await Promise.all([
+    let [mysteryMovieHi, mysteryMovieEn] = await Promise.all([
         responseMovieHi.json(),
         responseMovieEn.json(),
-        responseShowsHi.json(),
-        responseShowsEn.json()
     ]);
 
     mysteryMovieHi = mysteryMovieHi.results;
     mysteryMovieEn = mysteryMovieEn.results;
-    mysteryShowsHi = mysteryShowsHi.results;
-    mysteryShowsEn = mysteryShowsEn.results;
 
-    let allMystery = [];
+    let allMysteryMovies = [];
+    let allMysteryMoviesIds = [];
 
     for (let i = 0; i < 8; i++) {
         if (mysteryMovieHi[i] !== undefined) {
-            allMystery.push(mysteryMovieHi[i]);
+            allMysteryMovies.push(mysteryMovieHi[i]);
+            allMysteryMoviesIds.push((mysteryMovieHi[i]).id)
         }
         if (mysteryMovieEn[i] !== undefined) {
-            allMystery.push(mysteryMovieEn[i]);
-        }
-        if (mysteryShowsHi[i] !== undefined) {
-            allMystery.push(mysteryShowsHi[i]);
-        }
-        if (mysteryShowsEn[i] !== undefined) {
-            allMystery.push(mysteryShowsEn[i]);
+            allMysteryMovies.push(mysteryMovieEn[i]);
+            allMysteryMoviesIds.push((mysteryMovieEn[i]).id)
         }
     }
 
     return {
-        allMystery
+        allMysteryMovies,
+        allMysteryMoviesIds
+    }
+}
+
+export const getMysteryShows = async () => {
+    let [responseShowsHi, responseShowsEn] = await Promise.all([
+        fetch(tvURL("popularity.desc", "9648", "", "hi", "122")),
+        fetch(tvURL("popularity.desc", "9648", "", "en", "122"))
+    ]);
+
+    let [mysteryShowsHi, mysteryShowsEn] = await Promise.all([
+        responseShowsHi.json(),
+        responseShowsEn.json()
+    ]);
+
+    mysteryShowsHi = mysteryShowsHi.results;
+    mysteryShowsEn = mysteryShowsEn.results;
+
+    let allMysteryShows = [];
+    let allMysteryShowsIds = [];
+
+    for (let i = 0; i < 8; i++) {
+        if (mysteryShowsHi[i] !== undefined) {
+            allMysteryShows.push(mysteryShowsHi[i]);
+            allMysteryShowsIds.push((mysteryShowsHi[i]).id);
+        }
+        if (mysteryShowsEn[i] !== undefined) {
+            allMysteryShows.push(mysteryShowsEn[i]);
+            allMysteryShowsIds.push((mysteryShowsEn[i]).id);
+        }
+    }
+
+    return {
+        allMysteryShows,
+        allMysteryShowsIds
     }
 
 }
-
-export default getAllMysteries;

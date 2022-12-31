@@ -3,10 +3,12 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BsFillPlayFill } from "react-icons/bs";
 import { FreeMode, Keyboard, Mousewheel } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import CardLoading from './CardLoading';
 
 import Link from "next/link";
 import "swiper/css";
 import "swiper/css/free-mode";
+import { useEffect, useState } from "react";
 
 const CardDetail = ({ title, description, genres, date, detail }) => {
   return (
@@ -55,7 +57,16 @@ const CardDetail = ({ title, description, genres, date, detail }) => {
 };
 
 const Card = ({ cardDetail, poster, id, cardGenres }) => {
-  return (
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (cardDetail) {
+      setLoading(false);
+    }
+  }, [cardDetail])
+
+  return loading ? <CardLoading /> : (
     <Link href={cardDetail.release_date ? `/movies/${id}` : `/tv/${id}`}>
       <div className="card group/card w-[9.5rem] h-[100%] rounded-lg mr-4 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer">
         <Image

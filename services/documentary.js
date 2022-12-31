@@ -12,18 +12,22 @@ export const getDocumentaryMovies = async () => {
     documentaryMoviesEn = documentaryMoviesEn.results;
 
     let allDocumentaryMovies = [];
+    let allDocumentaryMIds = [];
 
     for (let i = 0; i < 8; i++) {
         if (documentaryMoviesHi[i] !== undefined) {
             allDocumentaryMovies.push(documentaryMoviesHi[i]);
+            allDocumentaryMIds.push((documentaryMoviesHi[i]).id)
         }
         if (documentaryMoviesEn[i] !== undefined) {
             allDocumentaryMovies.push(documentaryMoviesEn[i]);
+            allDocumentaryMIds.push((documentaryMoviesEn[i]).id)
         }
     }
 
     return {
-        allDocumentaryMovies
+        allDocumentaryMovies,
+        allDocumentaryMIds
     }
 }
 
@@ -38,17 +42,21 @@ export const getdocumentaryShows = async () => {
     documentaryShowsEn = documentaryShowsEn.results;
 
     let allDocumentaryShows = [];
+    let allDocumentarySIds = [];
 
     for (let i = 0; i < 8; i++) {
         if (documentaryShowsHi[i] !== undefined) {
             allDocumentaryShows.push(documentaryShowsHi[i]);
+            allDocumentarySIds.push((documentaryShowsHi[i]).id)
         }
         if (documentaryShowsEn[i] !== undefined) {
             allDocumentaryShows.push(documentaryShowsEn[i]);
+            allDocumentarySIds.push((documentaryShowsEn[i]).id)
         }
     }
 
     return {
-        allDocumentaryShows
+        allDocumentaryShows,
+        allDocumentarySIds
     }
 }

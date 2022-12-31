@@ -12,18 +12,21 @@ export const getCrimeMovies = async () => {
     crimeMoviesEn = crimeMoviesEn.results;
 
     let allCrimeMovies = [];
-
+    let allCrimeMoviesIds = [];
     for (let i = 0; i < 8; i++) {
         if (crimeMoviesHi[i] !== undefined) {
             allCrimeMovies.push(crimeMoviesHi[i]);
+            allCrimeMoviesIds.push((crimeMoviesHi[i]).id)
         }
         if (crimeMoviesEn[i] !== undefined) {
             allCrimeMovies.push(crimeMoviesEn[i]);
+            allCrimeMoviesIds.push((crimeMoviesEn[i]).id)
         }
     }
 
     return {
-        allCrimeMovies
+        allCrimeMovies,
+        allCrimeMoviesIds
     }
 }
 
@@ -38,17 +41,21 @@ export const getCrimeShows = async () => {
     crimeShowsEn = crimeShowsEn.results;
 
     let allCrimeShows = [];
+    let allCrimeShowsIds = [];
 
     for (let i = 0; i < 8; i++) {
         if (crimeShowsHi[i] !== undefined) {
             allCrimeShows.push(crimeShowsHi[i]);
+            allCrimeShowsIds.push((crimeShowsHi[i]).id)
         }
         if (crimeShowsEn[i] !== undefined) {
             allCrimeShows.push(crimeShowsEn[i]);
+            allCrimeShowsIds.push((crimeShowsEn[i]).id)
         }
     }
 
     return {
-        allCrimeShows
+        allCrimeShows,
+        allCrimeShowsIds
     }
 }

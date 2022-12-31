@@ -1,6 +1,8 @@
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsFillPlayFill, BsFillShareFill } from "react-icons/bs";
+import HeroLoading from "./HeroLoading";
 
 const WatchNowBtn = () => {
   return (
@@ -34,7 +36,16 @@ const MoreBtns = () => {
 
 function MovieWatchCard({ details }) {
 
-  return (
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (details) {
+      setLoading(false);
+    }
+  }, [details]);
+
+
+  return loading ? <HeroLoading /> : (
     <div className="movie-card-detail to-transparent w-[93%] h-[100%] rounded-lg mx-auto relative hover:cursor-pointer">
       <div className="content flex justify-start">
         <div className="text w-[40%] py-16 pl-16 relative z-50">

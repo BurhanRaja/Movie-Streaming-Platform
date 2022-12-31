@@ -12,14 +12,22 @@ export const getPopularMovies = async () => {
     popularMoviesEn = popularMoviesEn.results;
 
     let popularMovies = [];
+    let popularMoviesIds = [];
     
     for (let i = 0; i < 8; i++) {
-        popularMovies.push(popularMoviesHi[i]);
-        popularMovies.push(popularMoviesEn[i]);
+        if (popularMoviesHi[i] !== undefined) {
+            popularMovies.push(popularMoviesHi[i]);
+            popularMoviesIds.push((popularMoviesHi[i]).id);
+        }
+        if (popularMoviesEn[i] !== undefined) {
+            popularMovies.push(popularMoviesEn[i]);
+            popularMoviesIds.push((popularMoviesEn[i]).id);
+        }
     }
 
     return {
-        popularMovies
+        popularMovies,
+        popularMoviesIds
     };
 }
 
@@ -34,13 +42,21 @@ export const getPopularShows = async () => {
     popularShowsEn = popularShowsEn.results;
 
     let popularShows = [];
-    
+    let popularShowsIds = [];
+
     for (let i = 0; i < 6; i++) {
-        popularShows.push(popularShowsHi[i]);
-        popularShows.push(popularShowsEn[i]);
+        if (popularShowsHi[i] !== undefined) {
+            popularShows.push(popularShowsHi[i]);
+            popularShowsIds.push((popularShowsHi[i]).id);
+        }
+        if (popularShowsEn[i] !== undefined) {
+            popularShows.push(popularShowsEn[i]);
+            popularShowsIds.push((popularShowsEn[i]).id);
+        }
     }
 
     return {
-        popularShows
+        popularShows,
+        popularShowsIds
     };
 }

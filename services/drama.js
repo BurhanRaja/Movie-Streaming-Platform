@@ -12,18 +12,21 @@ export const getDramaMovies = async () => {
     dramaMoviesEn = dramaMoviesEn.results;
 
     let allDramaMovies = [];
-
+    let allDramaMoviesIds = [];
     for (let i = 0; i < 8; i++) {
         if (dramaMoviesHi[i] !== undefined) {
             allDramaMovies.push(dramaMoviesHi[i]);
+            allDramaMoviesIds.push((dramaMoviesHi[i]).id);
         }
         if (dramaMoviesEn[i] !== undefined) {
             allDramaMovies.push(dramaMoviesEn[i]);
+            allDramaMoviesIds.push((dramaMoviesEn[i]).id);
         }
     }
 
     return {
-        allDramaMovies
+        allDramaMovies,
+        allDramaMoviesIds
     }
 }
 
@@ -38,17 +41,20 @@ export const getDramaShows = async () => {
     dramaShowsEn = dramaShowsEn.results;
 
     let allDramaShows = [];
-
+    let allDramaShowsIds = [];
     for (let i = 0; i < 8; i++) {
         if (dramaShowsHi[i] !== undefined) {
             allDramaShows.push(dramaShowsHi[i]);
+            allDramaShowsIds.push((dramaShowsHi[i]).id);
         }
         if (dramaShowsEn[i] !== undefined) {
             allDramaShows.push(dramaShowsEn[i]);
+            allDramaShowsIds.push((dramaShowsEn[i]).id);
         }
     }
 
     return {
-        allDramaShows
+        allDramaShows,
+        allDramaShowsIds
     }
 }

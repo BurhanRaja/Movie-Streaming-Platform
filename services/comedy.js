@@ -12,18 +12,21 @@ export const getComedyMovies = async () => {
     comedyMoviesEn = comedyMoviesEn.results;
 
     let allComedyMovies = [];
-
+    let allComedyMoviesIds = [];
     for (let i = 0; i < 8; i++) {
         if (comedyMoviesHi[i] !== undefined) {
             allComedyMovies.push(comedyMoviesHi[i]);
+            allComedyMoviesIds.push((comedyMoviesHi[i]).id);
         }
         if (comedyMoviesEn[i] !== undefined) {
             allComedyMovies.push(comedyMoviesEn[i]);
+            allComedyMoviesIds.push((comedyMoviesEn[i]).id);
         }
     }
 
     return {
-        allComedyMovies
+        allComedyMovies,
+        allComedyMoviesIds
     }
 }
 
@@ -38,17 +41,20 @@ export const getComedyShows = async () => {
     comedyShowsEn = comedyShowsEn.results;
 
     let allComedyShows = [];
-
+    let allComedyShowsIds = [];
     for (let i = 0; i < 8; i++) {
         if (comedyShowsHi[i] !== undefined) {
             allComedyShows.push(comedyShowsHi[i]);
+            allComedyShowsIds.push((comedyShowsHi[i]).id);
         }
         if (comedyShowsEn[i] !== undefined) {
             allComedyShows.push(comedyShowsEn[i]);
+            allComedyShowsIds.push((comedyShowsEn[i]).id);
         }
     }
 
     return {
-        allComedyShows
+        allComedyShows,
+        allComedyShowsIds
     }
 }
