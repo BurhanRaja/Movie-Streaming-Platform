@@ -8,12 +8,12 @@ export const getGenreMovie = async () => {
   return genreMovie;
 };
 
-export const getGenreTV = async () => {
+export const getGenreShow = async () => {
   const tvGenreUrl = `${process.env.NEXT_PUBLIC_URL}genre/tv/list?api_key=${process.env.NEXT_PUBLIC_API_KEY}`;
 
   const response = await fetch(tvGenreUrl);
   // Promise Json
-  let genreTV = await response.json();
+  let genreShow = await response.json();
 
-  return genreTV;
+  return genreShow;
 };

@@ -1,7 +1,7 @@
 import CardSlider from "../../components/CardSlider";
 import Extras from "../../components/Extras";
 import Layout from "../../components/Layout";
-import MovieWatchCard from "../../components/MovieWatchCard";
+import MovieWatchCard from "../../components/movie/MovieWatchCard";
 import { getComedyMovies } from "../../services/comedy";
 import { getCrimeMovies } from "../../services/crime";
 import { getDocumentaryMovies } from "../../services/documentary";
@@ -14,11 +14,11 @@ import { getPopularMovies } from "../../services/popular";
 import getRomanticMovies from "../../services/romance";
 import { getScifiMovies } from "../../services/sci-fi";
 
-function MovieDetail({ movie, videos, images, similar, genreMovie }) {
+function MovieDetail({ movie, videos, similar, genreMovie }) {
   return (
     <Layout>
       <MovieWatchCard details={movie} />
-      <Extras videos={videos} images={images} />
+      <Extras videos={videos} />
       <div className="mt-12">
         {similar.total_pages === 0 || !similar ? (
           <div className="w-[93%] mx-auto">
@@ -132,20 +132,19 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
 export const getStaticProps = async (ctx) => {
   const { params } = ctx;
-  let { movie, videos, images, similar } = await getMovie(params.id);
+  let { movie, videos, similar } = await getMovie(params.id);
   let genreMovie = await getGenreMovie();
 
   return {
     props: {
       movie,
       videos,
-      images,
       similar,
       genreMovie,
     },

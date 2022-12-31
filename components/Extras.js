@@ -4,12 +4,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 
-function Extras({ videos, images }) {
+function Extras({ videos }) {
 //   console.log(videos.results);
   return (
     <div className="w-[93%] mx-auto">
       <div className="">
-        <p className="text-2xl font-bold text-white mb-10 mt-20">
+        <p className="text-2xl font-bold text-white mb-10">
           Trailers and Extras
         </p>
       </div>

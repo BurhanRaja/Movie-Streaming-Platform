@@ -67,7 +67,7 @@ const Card = ({ cardDetail, poster, id, cardGenres }) => {
   }, [cardDetail])
 
   return loading ? <CardLoading /> : (
-    <Link href={cardDetail.release_date ? `/movies/${id}` : `/tv/${id}`}>
+    <Link href={cardDetail.release_date ? `/movies/${id}` : `/shows/${id}`}>
       <div className="card group/card w-[9.5rem] h-[100%] rounded-lg mr-4 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer">
         <Image
           src={`https://image.tmdb.org/t/p/original${poster}`}

@@ -31,7 +31,7 @@ export const getDocumentaryMovies = async () => {
     }
 }
 
-export const getdocumentaryShows = async () => {
+export const getDocumentaryShows = async () => {
     const responseHi = await fetch(tvURL("release_date.desc", "99", "", "hi", "122"));
     const responseEn = await fetch(tvURL("release_date.desc", "99", "", "en", "122"));
 

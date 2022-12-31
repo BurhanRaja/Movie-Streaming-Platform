@@ -5,10 +5,10 @@ import { getComedyMovies, getComedyShows } from "../services/comedy";
 import { getCrimeMovies, getCrimeShows } from "../services/crime";
 import {
   getDocumentaryMovies,
-  getdocumentaryShows,
+  getDocumentaryShows,
 } from "../services/documentary";
 import { getDramaMovies, getDramaShows } from "../services/drama";
-import { getGenreMovie, getGenreTV } from "../services/genres";
+import { getGenreMovie, getGenreShow } from "../services/genres";
 import { getLatestMovies, getLatestShows } from "../services/latest";
 import { getMysteryMovies, getMysteryShows } from "../services/mystery";
 import { getPopularMovies, getPopularShows } from "../services/popular";
@@ -82,7 +82,7 @@ export async function getServerSideProps() {
     documentaryS,
   ] = await Promise.all([
     getGenreMovie(),
-    getGenreTV(),
+    getGenreShow(),
     getLatestMovies(),
     getLatestShows(),
     getPopularMovies(),
@@ -99,7 +99,7 @@ export async function getServerSideProps() {
     getCrimeMovies(),
     getCrimeShows(),
     getDocumentaryMovies(),
-    getdocumentaryShows(),
+    getDocumentaryShows(),
   ]);
 
   // ? Genres

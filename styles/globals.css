@@ -103,10 +103,28 @@ body {
   );
 }
 
+.showdetail-image-gradient{
+    background: linear-gradient(
+    to right,
+    rgb(6, 12, 26) 0%,
+    transparent 23%,
+    transparent 100%
+  );
+}
+
 .movie-card-detail{
   background-color: rgb(6, 12, 26) ;
 }
 
-/* .swiper-slide-active {
-  width: auto;
-} */
+.show-card-detail{
+  background-color: rgb(6, 12, 26) ;
+}
+
+.episode-card-gradient {
+  background: linear-gradient(
+    to top,
+    rgb(34, 34, 34) 0%,
+    rgba(48, 48, 48, 0.548) 70%,
+    rgba(102, 102, 102, 0.068) 100%
+  );
+}
