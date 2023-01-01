@@ -71,7 +71,7 @@ function TVWatchCard({ details }) {
           </div>
           <div className="image w-40% z-10 relative">
             <Image
-              src={`https://image.tmdb.org/t/p/original${details.backdrop_path}`}
+              src={details && `https://image.tmdb.org/t/p/original${details.backdrop_path}`}
               className="rounded-lg"
               width={765}
               height={100}

@@ -11,23 +11,17 @@ const getRomanticMovies = async () => {
     romanticMoviesEn = romanticMoviesEn.results;
 
     let allRomanticMovies = [];
-    let allRomanticMIds = []
 
     for (let i = 0; i < 8; i++) {
         if (romanticMoviesHi[i] !== undefined) {
             allRomanticMovies.push(romanticMoviesHi[i]);
-            allRomanticMIds.push((romanticMoviesHi[i]).id);
         }
         if (romanticMoviesEn[i] !== undefined) {
             allRomanticMovies.push(romanticMoviesEn[i]);
-            allRomanticMIds.push((romanticMoviesEn[i]).id);
         }
     }
 
-    return {
-        allRomanticMovies,
-        allRomanticMIds
-    }
+    return allRomanticMovies;
 }
 
 export default getRomanticMovies;

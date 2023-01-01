@@ -4,35 +4,34 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 
-function Extras({ videos }) {
-//   console.log(videos.results);
-  return (
-    <div className="w-[93%] mx-auto">
+import useSWR from "swr";
+import { useEffect, useState } from "react";
+import SwiperSlider from "./SwiperSlider";
+
+function Extras({ id }) {
+
+  const getExtras = (url) => fetch(url).then((res) => res.json());
+
+  const {data, error} = useSWR(
+    `${process.env.NEXT_PUBLIC_URL}tv/${id}/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`,
+    getExtras
+  );
+
+  if(error) console.log(error);
+
+  if (data) {
+    return (
+      <div className="w-[93%] mx-auto">
       <div className="">
-        <p className="text-2xl font-bold text-white mb-10">
+        <p className="text-2xl font-bold text-white mb-10 mt-10">
           Trailers and Extras
         </p>
       </div>
-      <Swiper
-        modules={[FreeMode, Mousewheel, Keyboard]}
-        slidesPerView={3}
-        spaceBetween={30}
-        scrollbar={true}
-        mousewheel={true}
-        keyboard={true}
-        freeMode={true}
-        style={{
-        width: "100%",
-          perspective: "17px",
-          height: "15rem",
-          overflow: "visible",
-          zIndex: "10",
-        }}
-      >
-        {videos.results?.map((el) => {
+      <SwiperSlider countCard={3}>
+        {data.results?.map((el) => {
           if (el.site === "YouTube") {
             return (
-              <SwiperSlide key={el.id} style={{"width": "30%"}}>
+              <SwiperSlide key={el.id} style={{ width: "30%" }}>
                 <iframe
                   className="mr-4 rounded-md"
                   width="400"
@@ -47,9 +46,10 @@ function Extras({ videos }) {
             );
           }
         })}
-      </Swiper>
+      </SwiperSlider>
     </div>
   );
+}
 }
 
 export default Extras;

@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
-import CardSlider from "../components/CardSlider";
 import Layout from "../components/Layout";
+import CardSlider from "../components/cards/CardSlider";
 import { getComedyMovies, getComedyShows } from "../services/comedy";
 import { getCrimeMovies, getCrimeShows } from "../services/crime";
 import {
@@ -14,10 +14,7 @@ import { getMysteryMovies, getMysteryShows } from "../services/mystery";
 import { getPopularMovies, getPopularShows } from "../services/popular";
 import getRomanticMovies from "../services/romance";
 import { getScifiMovies, getScifiShows } from "../services/sci-fi";
-
-const Hero = dynamic(() => import("../components/Hero"), {
-  ssr: false,
-});
+import Hero from "../components/Hero";
 
 export default function Home({
   allLatest,
@@ -60,7 +57,7 @@ export default function Home({
 }
 
 export async function getServerSideProps() {
-  const [
+  let [
     genreMovie,
     genreTV,
     latestM,
@@ -112,72 +109,55 @@ export async function getServerSideProps() {
   }
 
   // ? Latest
-  let latestMovies = latestM.latestMovies.filter(
+  latestM = latestM.filter(
     (el) => new Date(el.release_date) < new Date("2023-01-01")
   );
-  let latestShows = latestS.latestShows;
   let allLatest = [];
   for (let i = 0; i < 8; i++) {
-    if (latestMovies[i] !== undefined) {
-      allLatest.push(latestMovies[i]);
-    }
-    if (latestShows[i] !== undefined) {
-      allLatest.push(latestShows[i]);
-    }
+    allLatest.push(latestM[i]);
+    allLatest.push(latestS[i]);
   }
 
   // ? Drama
   let allDrama = [];
-  let dramaMovies = allDramaM.allDramaMovies;
-  let dramaShows = allDramaS.allDramaShows;
   for (let i = 0; i < 8; i++) {
-    allDrama.push(dramaMovies[i]);
-    allDrama.push(dramaShows[i]);
+    allDrama.push(allDramaM[i]);
+    allDrama.push(allDramaS[i]);
   }
 
   // ? Scifi
   let allMystery = [];
-  let allMysterMovies = allMysteryM.allMysteryMovies;
-  let allMysteryShows = allMysteryS.allMysteryShows;
   for (let i = 0; i < 8; i++) {
-    allMystery.push(allMysterMovies[i]);
-    allMystery.push(allMysteryShows[i]);
+    allMystery.push(allMysteryM[i]);
+    allMystery.push(allMysteryS[i]);
   }
 
   // ? Scifi
   let allSciFi = [];
-  let allScifiMovies = allScifiM.allSciFiMovies;
-  let allScifiShows = allScifiS.allSciFiShows;
   for (let i = 0; i < 8; i++) {
-    allSciFi.push(allScifiMovies[i]);
-    allSciFi.push(allScifiShows[i]);
+    allSciFi.push(allScifiM[i]);
+    allSciFi.push(allScifiS[i]);
   }
 
   // ? Comedy
   let allComedy = [];
-  let comedyMovies = comedyM.allComedyMovies;
-  let comedyShows = comedyS.allComedyShows;
   for (let i = 0; i < 8; i++) {
-    allComedy.push(comedyMovies[i]);
-    allComedy.push(comedyShows[i]);
+    allComedy.push(comedyM[i]);
+    allComedy.push(comedyS[i]);
   }
 
   // ? Crime
   let allCrime = [];
-  let crimeMovies = crimeM.allCrimeMovies;
-  let crimeShows = crimeS.allCrimeShows;
   for (let i = 0; i < 8; i++) {
-    allCrime.push(crimeMovies[i]);
-    allCrime.push(crimeShows[i]);
+    allCrime.push(crimeM[i]);
+    allCrime.push(crimeS[i]);
   }
 
   // ? Documentary
   let allDocumentary = [];
-  let documentaryMovies = documentaryM.allDocumentaryMovies;
-  let documentaryShows = documentaryS.allDocumentaryShows;
   for (let i = 0; i < 8; i++) {
-    allDocumentary.push(documentaryMovies[i]);
-    allDocumentary.push(documentaryShows[i]);
+    allDocumentary.push(documentaryM[i]);
+    allDocumentary.push(documentaryS[i]);
   }
 
   return {
@@ -185,8 +165,8 @@ export async function getServerSideProps() {
       allLatest,
       genres,
       // Popular
-      popularMovies: popularM.popularMovies,
-      popularShows: popularS.popularShows,
+      popularMovies: popularM,
+      popularShows: popularS,
       // Mystery
       allMystery,
       // SCI-FI
@@ -194,7 +174,7 @@ export async function getServerSideProps() {
       // Drama
       allDrama: allDrama,
       // Romance
-      romanceMovies: allRomanticM.allRomanticMovies,
+      romanceMovies: allRomanticM,
       // Comedy
       allComedy,
       // Crime

@@ -17,23 +17,17 @@ export const getMysteryMovies = async () => {
     mysteryMovieEn = mysteryMovieEn.results;
 
     let allMysteryMovies = [];
-    let allMysteryMoviesIds = [];
 
     for (let i = 0; i < 8; i++) {
         if (mysteryMovieHi[i] !== undefined) {
             allMysteryMovies.push(mysteryMovieHi[i]);
-            allMysteryMoviesIds.push((mysteryMovieHi[i]).id)
         }
         if (mysteryMovieEn[i] !== undefined) {
             allMysteryMovies.push(mysteryMovieEn[i]);
-            allMysteryMoviesIds.push((mysteryMovieEn[i]).id)
         }
     }
 
-    return {
-        allMysteryMovies,
-        allMysteryMoviesIds
-    }
+    return allMysteryMovies;
 }
 
 export const getMysteryShows = async () => {
@@ -51,22 +45,16 @@ export const getMysteryShows = async () => {
     mysteryShowsEn = mysteryShowsEn.results;
 
     let allMysteryShows = [];
-    let allMysteryShowsIds = [];
 
     for (let i = 0; i < 8; i++) {
         if (mysteryShowsHi[i] !== undefined) {
             allMysteryShows.push(mysteryShowsHi[i]);
-            allMysteryShowsIds.push((mysteryShowsHi[i]).id);
         }
         if (mysteryShowsEn[i] !== undefined) {
             allMysteryShows.push(mysteryShowsEn[i]);
-            allMysteryShowsIds.push((mysteryShowsEn[i]).id);
         }
     }
 
-    return {
-        allMysteryShows,
-        allMysteryShowsIds
-    }
+    return allMysteryShows;
 
 }

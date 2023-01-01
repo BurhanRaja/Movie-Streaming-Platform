@@ -10,6 +10,7 @@ const nextConfig = {
         pathname: '/t/p/original/**',
       },
     ],
+    domains: ['image.tmdb.org', 'api.themoviedb.org']
   },
 }
 
