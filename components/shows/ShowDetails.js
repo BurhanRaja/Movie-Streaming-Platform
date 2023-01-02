@@ -29,7 +29,7 @@ function ShowDetails({ id, genreShow }) {
             return <Seasons key={el} seasonNo={el} id={id} />
         })}
       </div>
-      <Extras id={id} />
+      <Extras id={id} type="tv" />
       <SimilarShows id={id} genreShow={genreShow} />
     </Layout>
   );

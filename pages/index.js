@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import Layout from "../components/Layout";
 import CardSlider from "../components/cards/CardSlider";
 import { getComedyMovies, getComedyShows } from "../services/comedy";

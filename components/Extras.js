@@ -27,7 +27,7 @@ function Extras({ id, type }) {
           </p>
         </div>
         <SwiperSlider countCard={3}>
-          {data.total_pages === 0 || data.results === [] ? (
+          {data.results === [] ? (
             <div className="w-[93%] mx-auto">
               <h2 className=" text-red-500 ">No Recommendations</h2>
             </div>
