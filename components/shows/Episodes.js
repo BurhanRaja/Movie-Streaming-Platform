@@ -4,9 +4,8 @@ import { Fragment } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsFillPlayFill } from "react-icons/bs";
 import { SwiperSlide } from "swiper/react";
-import SwiperSlider from "../SwiperSlider";
 import useSWR from "swr";
-import { useRouter } from "next/router";
+import SwiperSlider from "../SwiperSlider";
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -43,12 +42,15 @@ const CardDetail = ({ description, episodeNo, seasonNo, date }) => {
 };
 
 const Card = ({ description, episodeNo, seasonNo, date, image }) => {
-
   return (
     <Link href="/">
-      <div className="card group/card w-[18rem] h-[10.2rem] rounded-lg  relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer">
+      <div className="card group/card w-[18rem] h-[10.2rem] rounded-lg mr-3 mb-3 mt-3 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer">
         <Image
-          src={image ? `https://image.tmdb.org/t/p/original${image}` : "/images/coming-soon.jpg"}
+          src={
+            image
+              ? `https://image.tmdb.org/t/p/original${image}`
+              : "/images/coming-soon.jpg"
+          }
           alt="card"
           width={400}
           height={300}
@@ -71,35 +73,64 @@ const Card = ({ description, episodeNo, seasonNo, date, image }) => {
   );
 };
 
-function Episodes({ id }) {
-
+function Episodes({ id, seasonNo, sliderEnable }) {
   const getSeason = (url) => fetch(url).then((res) => res.json());
 
-  const {data, isLoading} = useSWR(`${process.env.NEXT_PUBLIC_URL}tv/${id}/season/1?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`, getSeason);
+  const { data, isLoading } = useSWR(
+    `${process.env.NEXT_PUBLIC_URL}tv/${id}/season/${seasonNo}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`,
+    getSeason
+  );
 
-  return !isLoading && (
-    <Fragment>
-      <div className="w-[93%] mx-auto">
-        <div className="">
-          <p className="text-2xl font-bold text-white mb-10 mt-10">Episodes - Season 1</p>
-        </div>
-        <SwiperSlider countCard={4}>
-          {data.episodes.map((el) => {
-            return (
-              <SwiperSlide key={el.id}>
-                <Card
-                  description={el.overview}
-                  episodeNo={el.episode_number}
-                  seasonNo={el.season_number}
-                  date={el.air_date}
-                  image={el.still_path}
-                />
-              </SwiperSlide>
-            );
-          })}
-        </SwiperSlider>
-      </div>
-    </Fragment>
+  return (
+    !isLoading && (
+      <Fragment>
+        {sliderEnable ? (
+          <div className="w-[93%] mx-auto">
+            <div className="">
+              <p className="text-2xl font-bold text-white mb-10 mt-10">
+                Episodes - Season 1
+              </p>
+            </div>
+            <SwiperSlider countCard={4}>
+              {data.episodes.map((el) => {
+                return (
+                  <SwiperSlide key={el.id}>
+                    <Card
+                      description={el.overview}
+                      episodeNo={el.episode_number}
+                      seasonNo={el.season_number}
+                      date={el.air_date}
+                      image={el.still_path}
+                    />
+                  </SwiperSlide>
+                );
+              })}
+            </SwiperSlider>
+          </div>
+        ) : (
+          <div className="w-[90%] mx-auto mt-16">
+            <div className="">
+              <p className="text-4xl font-bold text-white mb-5">{data.name}</p>
+              <p className="text-lg text-slate-300 mb-5">{data.overview}</p>
+            </div>
+            <div className="flex items-center justify-start flex-wrap">
+              {data.episodes.map((el) => {
+                return (
+                  <Card
+                    key={el.id}
+                    description={el.overview}
+                    episodeNo={el.episode_number}
+                    seasonNo={el.season_number}
+                    date={el.air_date}
+                    image={el.still_path}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </Fragment>
+    )
   );
 }
 

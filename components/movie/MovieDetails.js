@@ -5,15 +5,12 @@ import Layout from "../../components/Layout";
 import MovieWatchCard from "../../components/movie/MovieWatchCard";
 
 
-function MovieDetails({ movie, videos, similar, genreMovie }) {
-
-  const {asPath} = useRouter();
-  // console.log(asPath.substring(8));
+function MovieDetails({ id, movie, similar, genreMovie }) {
 
   return (
     <Layout>
       <MovieWatchCard details={movie} />
-      <Extras videos={videos} />
+      <Extras id={id} type="movie" />
       <div className="mt-12">
         {similar.total_pages === 0 || !similar ? (
           <div className="w-[93%] mx-auto">

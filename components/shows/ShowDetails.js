@@ -20,7 +20,7 @@ function ShowDetails({ id, genreShow }) {
   return (
     <Layout>
       <TVWatchCard details={data} />
-      <Episodes id={id} />
+      <Episodes id={id} seasonNo={1} sliderEnable={true} />
       <div className="w-[93%] mx-auto">
           <p className="text-2xl font-bold text-white mb-6 mt-6">Seasons</p>
         </div>

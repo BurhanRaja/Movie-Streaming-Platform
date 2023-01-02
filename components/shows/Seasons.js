@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import useSWR from "swr";
 
-const Card = ({ name, image }) => {
+const Card = ({ name, image, dataId, seasonNo }) => {
   return (
-    <Link href={`/`}>
+    <Link href={`/shows/season/${dataId}/${seasonNo+1}`}>
       <div className="card group/card w-[9.5rem] h-[100%] rounded-lg mr-6 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer mb-4">
         <Image
           src={`https://image.tmdb.org/t/p/original${image}`}
@@ -37,7 +37,7 @@ function Seasons({ seasonNo, id }) {
   if (data) {
     return (
       <div>
-        <Card name={data.name} image={data.poster_path} />
+        <Card name={data.name} dataId={id} seasonNo={seasonNo} image={data.poster_path} />
       </div>
     );
   }
