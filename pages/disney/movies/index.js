@@ -1,9 +1,11 @@
 import React from 'react'
 
-function DisneyPlus() {
+function DisneyMovies() {
   return (
-    <div>DisneyPlus</div>
+    <div>
+      
+    </div>
   )
 }
 
-export default DisneyPlus
+export default DisneyMovies;

@@ -1,5 +1,5 @@
-import movieURL from "../utils/movieURL";
-import tvURL from "../utils/tvURL";
+import movieURL from "../../utils/movieURL";
+import tvURL from "../../utils/tvURL";
 
 export const getDocumentaryMovies = async () => {
   const responseHi = await fetch(

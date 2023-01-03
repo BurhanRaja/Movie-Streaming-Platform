@@ -1,18 +1,18 @@
 import Layout from "../components/Layout";
 import CardSlider from "../components/cards/CardSlider";
-import { getComedyMovies, getComedyShows } from "../services/comedy";
-import { getCrimeMovies, getCrimeShows } from "../services/crime";
+import { getComedyMovies, getComedyShows } from "../services/hotstar/comedy";
+import { getCrimeMovies, getCrimeShows } from "../services/hotstar/crime";
 import {
   getDocumentaryMovies,
   getDocumentaryShows,
-} from "../services/documentary";
-import { getDramaMovies, getDramaShows } from "../services/drama";
-import { getGenreMovie, getGenreShow } from "../services/genres";
-import { getLatestMovies, getLatestShows } from "../services/latest";
-import { getMysteryMovies, getMysteryShows } from "../services/mystery";
-import { getPopularMovies, getPopularShows } from "../services/popular";
-import getRomanticMovies from "../services/romance";
-import { getScifiMovies, getScifiShows } from "../services/sci-fi";
+} from "../services/hotstar/documentary";
+import { getDramaMovies, getDramaShows } from "../services/hotstar/drama";
+import { getGenreMovie, getGenreShow } from "../services/hotstar/genres";
+import { getLatestMovies, getLatestShows } from "../services/hotstar/latest";
+import { getMysteryMovies, getMysteryShows } from "../services/hotstar/mystery";
+import { getPopularMovies, getPopularShows } from "../services/hotstar/popular";
+import getRomanticMovies from "../services/hotstar/romance";
+import { getScifiMovies, getScifiShows } from "../services/hotstar/sci-fi";
 import Hero from "../components/Hero";
 
 export default function Home({
@@ -55,7 +55,7 @@ export default function Home({
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   let [
     genreMovie,
     genreTV,
