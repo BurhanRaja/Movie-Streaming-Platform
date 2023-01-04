@@ -31,7 +31,7 @@ function CardContainer() {
     ]
 
   return (
-    <div className="flex justify-center items-center mt-8">
+    <div className="flex justify-center items-center mt-5">
         {cardData.map((el) => {
             return <VideoCard image={el.image} video={el.video} />
         })

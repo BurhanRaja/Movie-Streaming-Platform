@@ -15,7 +15,7 @@ const getDisneyLatest = async () => {
 
   let allDisneyLatest = [];
 
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 6; i++) {
     if (latestM[i] !== undefined && latestM[i].backdrop_path !== null) {
       allDisneyLatest.push(latestM[i]);
     }

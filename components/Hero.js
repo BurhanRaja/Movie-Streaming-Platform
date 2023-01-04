@@ -55,7 +55,7 @@ function Hero({ data, genres }) {
   }, [data])
 
   return loading ? <HeroLoading /> : (
-    <section className="mb-20">
+    <section className="mb-16">
       <Swiper
         modules={[Navigation, EffectCoverflow, Autoplay]}
         effect="coverflow"
