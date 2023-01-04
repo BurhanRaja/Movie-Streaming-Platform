@@ -10,10 +10,10 @@ import "swiper/css/navigation";
 import { useEffect, useState } from "react";
 import HeroLoading from "./HeroLoading";
 
-function HeroCard({ id, title, description, image, genres, date }) {
+function HeroCard({ id, title, description, image, genres, date, link }) {
 
   return (
-    <Link href={`/movies/${id}`}>
+    <Link href={link}>
       <div className="hero-card to-transparent w-[93%] h-[100%] rounded-lg mx-auto">
         <div className="content flex justify-start">
           <div className="text w-[46%] py-16 pl-16">
@@ -92,6 +92,7 @@ function Hero({ data, genres }) {
                         return sameGenre.name;
                     })
                   }
+                  link={el.release_date ? `/movies/${el.id}` : `/shows/${el.id}`}
                   date={new Date(el.release_date || el.first_air_date)}
                 />
               </SwiperSlide>

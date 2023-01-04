@@ -1,12 +1,15 @@
-import React from 'react'
-import Layout from '../../components/Layout';
+import React from "react";
+import Layout from "../../components/Layout";
+import CardContainer from "../../components/videoCard/CardContainer";
+import Hero from "../../components/Hero";
 
 function DisneyPlus() {
   return (
     <Layout>
-      
+      <Hero />
+      <CardContainer />
     </Layout>
-  )
+  );
 }
 
 export default DisneyPlus;
@@ -24,8 +27,13 @@ export default DisneyPlus;
 // 14 - Fantasy
 // 10402 - Music
 
-
 // Star Wars movies from collection id - 10
 // Star wars series using keywords in tv shows
 
-// National Geographic - 7521 id
+// National Geographic id - 7521
+
+// Pixar id - 3
+
+// Walt Disney Studios id - 2
+
+// Marvel id - 420
