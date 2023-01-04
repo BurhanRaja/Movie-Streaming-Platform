@@ -18,9 +18,9 @@ const Video = ({ video }) => {
   );
 };
 
-function VideoCard({ image, video }) {
+function VideoCard({ image, video, link }) {
   return (
-    <Link href={"/"}>
+    <Link href={link}>
       <div className="card group/card w-[14.5rem] h-[100%] group/videocard rounded-lg mr-4 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer">
         <Image
           src={image}
