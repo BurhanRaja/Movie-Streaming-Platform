@@ -26,6 +26,16 @@ const NavItems = () => {
   return (
     <ul className="flex justify-center items-center text-white text-base ">
       {navItems?.map((el) => {
+        if (el.item === "Disney+") {
+          return (
+            <li
+              key={el.item}
+              className="text-gray-300 px-4 hover:cursor-pointer relative group/item-1 py-4"
+            >
+              <Link href="/disney">{el.item}</Link>
+            </li>
+          );
+        }
         return (
           <li
             key={el.item}
@@ -33,16 +43,17 @@ const NavItems = () => {
           >
             <a>{el.item}</a>
             <ul className="absolute z-50 top-12 left-0 bg-slate-800 rounded-md opacity-0 translate-y-6 group-hover/item-1:opacity-100 group-hover/item-1:translate-y-0 transition-all duration-500">
-              {el.dropItems && el.dropItems?.map((item) => {
-                return (
-                  <li
-                    key={item}
-                    className="w-auto hover:bg-black p-2 rounded-sm px-4 block"
-                  >
-                    <a>{item}</a>
-                  </li>
-                );
-              })}
+              {el.dropItems &&
+                el.dropItems?.map((item) => {
+                  return (
+                    <li
+                      key={item}
+                      className="w-auto hover:bg-black p-2 rounded-sm px-4 block"
+                    >
+                      <a>{item}</a>
+                    </li>
+                  );
+                })}
             </ul>
           </li>
         );

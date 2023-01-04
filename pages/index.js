@@ -7,7 +7,7 @@ import {
   getDocumentaryShows,
 } from "../services/hotstar/documentary";
 import { getDramaMovies, getDramaShows } from "../services/hotstar/drama";
-import { getGenreMovie, getGenreShow } from "../services/hotstar/genres";
+import { getGenreMovie, getGenreShow } from "../services/genres";
 import { getLatestMovies, getLatestShows } from "../services/hotstar/latest";
 import { getMysteryMovies, getMysteryShows } from "../services/hotstar/mystery";
 import { getPopularMovies, getPopularShows } from "../services/hotstar/popular";
