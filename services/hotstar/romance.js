@@ -1,4 +1,4 @@
-import movieURL from "../../utils/movieURL";
+import movieURL from "../../utils/hotstarDisney/movieURL";
 
 const getRomanticMovies = async () => {
   const responseHi = await fetch(

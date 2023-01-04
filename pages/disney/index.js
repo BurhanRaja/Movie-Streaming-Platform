@@ -28,7 +28,7 @@ export default DisneyPlus;
 // 10402 - Music
 
 // Star Wars movies from collection id - 10
-// Star wars series using keywords in tv shows
+// Lego star wars id - 302331
 
 // National Geographic id - 7521
 

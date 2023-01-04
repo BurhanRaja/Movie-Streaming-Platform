@@ -6,7 +6,7 @@ const getDisneyLearning = async () => {
   let resMovies = await fetch(
     movieURL("popularity.desc", "99", "7521", "en", "", "IN")
   );
-  let resShows = await fetch(tvURL("release_date.desc", "10764", "7521", "en", "", ""));
+  let resShows = await fetch(tvURL("first_air_date.desc", "10764", "7521", "en", "", ""));
 
   resMovies = await resMovies.json();
   resShows = await resShows.json();

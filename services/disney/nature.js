@@ -8,7 +8,7 @@ const getDisneyNature = async () => {
   let resMovies = await fetch(
     movieURL("release_date.desc", "", "4436", "en", "", "IN")
   );
-  let resShows = await fetch(tvURL("release_date.desc", "", "7521", "en", "", ""));
+  let resShows = await fetch(tvURL("first_air_date.desc", "", "7521", "en", "", ""));
 
   resMovies = await resMovies.json();
   resShows = await resShows.json();

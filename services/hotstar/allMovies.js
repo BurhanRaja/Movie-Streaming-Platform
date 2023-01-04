@@ -1,4 +1,4 @@
-import movieURL from "../../utils/movieURL"
+import movieURL from "../../utils/hotstarDisney/movieURL"
 
 const getAllMovies = async () => {
     const [responseMovieHi, responseMovieEn, responseMovieKo, responseMovieJa] = await Promise.all([

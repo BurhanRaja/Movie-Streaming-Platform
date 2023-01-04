@@ -1,5 +1,5 @@
-import movieURL from "../../utils/movieURL";
-import tvURL from "../../utils/tvURL";
+import movieURL from "../../utils/hotstarDisney/movieURL";
+import tvURL from "../../utils/hotstarDisney/tvURL";
 
 export const getCrimeMovies = async () => {
   const responseHi = await fetch(

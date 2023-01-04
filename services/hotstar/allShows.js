@@ -1,4 +1,4 @@
-import tvURL from "../../utils/tvURL";
+import tvURL from "../../utils/hotstarDisney/tvURL";
 
 const getAllshows = async () => {
   const [responseshowsHi, responseshowsEn, responseshowsKo, responseshowsJa] =

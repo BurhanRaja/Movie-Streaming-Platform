@@ -7,7 +7,7 @@ const getDisneyOriginals = async () => {
     movieURL("release_date.desc", "", "2", "en", "", "IN")
   );
   let resShows = await fetch(
-    tvURL("release_date.desc", "", "", "en", "122", "IN")
+    tvURL("first_air_date.desc", "", "", "en", "122", "IN")
   );
 
   resMovies = await resMovies.json();
