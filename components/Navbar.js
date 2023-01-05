@@ -7,11 +7,48 @@ const NavItems = () => {
   let navItems = [
     {
       item: "TV",
-      dropItems: ["Action", "Drama", "Comedy", "Romantic", "Mystery"],
+      dropItems: [
+        {
+          name: "Action",
+          link: "/shows/action"
+        }, 
+        {
+          name: "Drama",
+          link: "/shows/drama"
+        }, 
+        {
+          name: "Comedy",
+          link: "/shows/comedy"
+        }, 
+        {
+          name: "Romantic",
+          link: "/shows/romantic"
+        }, 
+        {
+          name: "Mystery",
+          link: "/shows/mystery"
+        }
+      ],
     },
     {
       item: "Movies",
-      dropItems: ["Hindi", "English", "Korean", "Japanese"],
+      dropItems: [
+        {
+          name: "Hindi",
+          link: "/movies/hindi"
+        },
+        {
+          name: "English",
+          link: "/movies/english"
+        },
+        {
+          name: "Korean",
+          link: "/movies/korean"
+        },
+        {
+          name: "Japanese",
+          link: "/movies/japanese"
+        },],
     },
     {
       item: "Sports",
@@ -42,15 +79,15 @@ const NavItems = () => {
             className="text-gray-300 px-4 hover:cursor-pointer relative group/item-1 py-4"
           >
             <a>{el.item}</a>
-            <ul className="absolute z-50 top-12 left-0 bg-slate-800 rounded-md opacity-0 translate-y-6 group-hover/item-1:opacity-100 group-hover/item-1:translate-y-0 transition-all duration-500">
+            <ul className="absolute group-hover/item-1:z-50 top-12 left-0 bg-slate-800 rounded-md opacity-0 translate-y-6 group-hover/item-1:opacity-100 group-hover/item-1:translate-y-0 transition-all duration-500">
               {el.dropItems &&
                 el.dropItems?.map((item) => {
                   return (
                     <li
-                      key={item}
+                      key={item.name}
                       className="w-auto hover:bg-black p-2 rounded-sm px-4 block"
                     >
-                      <a>{item}</a>
+                      <Link href={item.link}>{item.name}</Link>
                     </li>
                   );
                 })}

@@ -7,7 +7,7 @@ const Card = ({ name, image, dataId, seasonNo }) => {
     <Link href={`/shows/season/${dataId}/${seasonNo+1}`}>
       <div className="card group/card w-[9.5rem] h-[100%] rounded-lg mr-6 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer mb-4">
         <Image
-          src={`https://image.tmdb.org/t/p/original${image}`}
+          src={image ? `https://image.tmdb.org/t/p/original${image}` : "/images/disneyhotstar.jpg"}
           alt="card"
           width={200}
           height={300}

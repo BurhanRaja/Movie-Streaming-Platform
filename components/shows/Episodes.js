@@ -49,7 +49,7 @@ const Card = ({ description, episodeNo, seasonNo, date, image }) => {
           src={
             image
               ? `https://image.tmdb.org/t/p/original${image}`
-              : "/images/coming-soon.jpg"
+              : "/images/logo.webp"
           }
           alt="card"
           width={400}

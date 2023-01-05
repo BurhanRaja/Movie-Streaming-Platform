@@ -66,7 +66,7 @@ function MovieWatchCard({ details }) {
         </div>
         <div className="image w-40% z-10 relative">
           <Image
-            src={`https://image.tmdb.org/t/p/original${details.backdrop_path}`}
+            src={details.backdrop_path ? `https://image.tmdb.org/t/p/original${details.backdrop_path}` : "/images/logo.webp"}
             className="rounded-lg"
             width={765}
             height={100}

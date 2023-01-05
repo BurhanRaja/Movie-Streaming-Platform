@@ -30,7 +30,7 @@ function HeroCard({ id, title, description, image, genres, date, link }) {
           </div>
           <div className="image w-40% z-10 relative">
             <Image
-              src={`https://image.tmdb.org/t/p/original${image}`}
+              src={image ? `https://image.tmdb.org/t/p/original${image}` : "/images/logo.webp"}
               className="rounded-lg"
               width={765}
               height={100}
