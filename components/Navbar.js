@@ -10,23 +10,27 @@ const NavItems = () => {
       dropItems: [
         {
           name: "Action",
-          link: "/shows/action"
+          link: "/shows/genre/10759"
         }, 
         {
           name: "Drama",
-          link: "/shows/drama"
+          link: "/shows/genre/18"
         }, 
         {
           name: "Comedy",
-          link: "/shows/comedy"
+          link: "/shows/genre/35"
         }, 
         {
-          name: "Romantic",
-          link: "/shows/romantic"
+          name: "Family",
+          link: "/shows/genre/10751"
         }, 
         {
           name: "Mystery",
-          link: "/shows/mystery"
+          link: "/shows/genre/9648"
+        },
+        {
+          name: "Documentary",
+          link: "/shows/genre/99"
         }
       ],
     },
@@ -79,7 +83,7 @@ const NavItems = () => {
             className="text-gray-300 px-4 hover:cursor-pointer relative group/item-1 py-4"
           >
             <a>{el.item}</a>
-            <ul className="absolute group-hover/item-1:z-50 top-12 left-0 bg-slate-800 rounded-md opacity-0 translate-y-6 group-hover/item-1:opacity-100 group-hover/item-1:translate-y-0 transition-all duration-500">
+            <ul className="absolute z-50 top-12 left-0 bg-slate-800 rounded-md opacity-0 translate-y-6 group-hover/item-1:opacity-100 group-hover/item-1:translate-y-0 transition-all duration-500">
               {el.dropItems &&
                 el.dropItems?.map((item) => {
                   return (

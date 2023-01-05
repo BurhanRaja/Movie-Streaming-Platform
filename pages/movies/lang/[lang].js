@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import useSWRInfinite from "swr/infinite";
 import Card from "../../../components/cards/Card";
 import Layout from "../../../components/Layout";
