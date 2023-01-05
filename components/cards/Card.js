@@ -21,7 +21,11 @@ function Card({ cardDetail, poster, id, cardGenres }) {
     <Link href={cardDetail.release_date ? `/movies/${id}` : `/shows/${id}`}>
       <div className="card group/card w-[9.5rem] h-[100%] rounded-lg mr-4 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer">
         <Image
-          src={poster ? `https://image.tmdb.org/t/p/original${poster}` : "/images/disneyhotstar.jgp"}
+          src={
+            poster
+              ? `https://image.tmdb.org/t/p/original${poster}`
+              : "/images/disneyhotstar.jgp"
+          }
           alt="card"
           width={200}
           height={300}
@@ -56,7 +60,7 @@ function CardDetail({ title, description, genres, date, detail }) {
         className="description mt-1 mb-1 text-slate-500 font-bold"
         style={{ fontSize: "0.6rem" }}
       >
-        <p className="leading-3">{description.substr(0, 55)}...</p>
+        <p className="leading-3">{description.substring(0, 55)}...</p>
       </div>
       <div className="btn mt-1">
         {detail.title ? (

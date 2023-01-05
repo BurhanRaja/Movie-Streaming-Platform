@@ -35,19 +35,19 @@ const NavItems = () => {
       dropItems: [
         {
           name: "Hindi",
-          link: "/movies/hindi"
+          link: "/movies/lang/hi"
         },
         {
           name: "English",
-          link: "/movies/english"
+          link: "/movies/lang/en"
         },
         {
           name: "Korean",
-          link: "/movies/korean"
+          link: "/movies/lang/ko"
         },
         {
           name: "Japanese",
-          link: "/movies/japanese"
+          link: "/movies/lang/ja"
         },],
     },
     {
