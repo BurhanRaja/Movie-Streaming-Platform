@@ -27,9 +27,8 @@ function LangMovies({ lang, genres }) {
         <div className="flex items-center justify-start w-[93%] mx-auto flex-wrap">
           {moviesData.map((el) => {
             return (
-              <div className="mt-4 mb-4 mx-4">
+              <div className="mt-4 mb-4 mx-4" key={el.id}>
                 <Card
-                  key={el.id}
                   cardDetail={el}
                   cardGenres={el.genre_ids?.map((el) => {
                     let sameGenre = genres?.find((elem) => elem.id === el);

@@ -15,11 +15,9 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
-    "react-infinite-scroll-hook": "^4.0.4",
     "sharp": "^0.31.3",
     "swiper": "^8.4.5",
-    "swr": "^2.0.0",
-    "tw-elements": "^1.0.0-alpha13"
+    "swr": "^2.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

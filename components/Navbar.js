@@ -21,6 +21,10 @@ const NavItems = () => {
           link: "/shows/genre/35"
         }, 
         {
+          name: "Scifi",
+          link: "/shows/genre/10765"
+        }, 
+        {
           name: "Family",
           link: "/shows/genre/10751"
         }, 
