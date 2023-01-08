@@ -3,8 +3,6 @@ import tvURL from "../../utils/disney/tvURL";
 
 const getDisneyNature = async () => {
 
-    "https://api.themoviedb.org/3/discover/movie?api_key=2f9e10868a6746a6142393abb6da3841&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=1&with_companies=7521&with_genres=99&with_original_language=en&watch_region=IN&with_watch_monetization_types=flatrate"
-
   let resMovies = await fetch(
     movieURL("release_date.desc", "", "4436", "en", "", "IN")
   );

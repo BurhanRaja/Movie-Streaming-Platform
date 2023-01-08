@@ -35,7 +35,7 @@ function Card({ cardDetail, poster, id, cardGenres }) {
           key={cardDetail.id}
           title={cardDetail.title || cardDetail.name}
           description={cardDetail.overview}
-          genres={cardGenres}
+          genres={cardGenres || cardDetail.genres}
           date={new Date(cardDetail.release_date || cardDetail.first_air_date)}
           detail={cardDetail}
         />
@@ -50,17 +50,17 @@ function CardDetail({ title, description, genres, date, detail }) {
       <div className="title">
         <p className="font-bold mb-1">{title}</p>
         <p className="leading-3 mt-1 text-[0.6rem] font-semibold mb-2">
-          {genres?.map((el) => {
-            return <span key={el}>{el} . </span>;
-          })}
-          <span>{date.getFullYear()}</span>
+          {genres ? genres?.map((el) => {
+            return <span key={el}>{el.name || el} . </span>;
+          }) : "No Genres"}
+          <span>{date ? date.getFullYear() : "No Date"}</span>
         </p>
       </div>
       <div
         className="description mt-1 mb-1 text-slate-500 font-bold"
         style={{ fontSize: "0.6rem" }}
       >
-        <p className="leading-3">{description.substring(0, 55)}...</p>
+        <p className="leading-3">{description ? description.substring(0, 55) : "No Description"}...</p>
       </div>
       <div className="btn mt-1">
         {detail.title ? (

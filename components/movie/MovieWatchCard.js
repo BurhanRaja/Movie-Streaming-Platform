@@ -48,7 +48,7 @@ function MovieWatchCard({ details }) {
   ) : (
     <div className="movie-card-detail to-transparent w-[93%] h-[100%] rounded-lg mx-auto relative hover:cursor-pointer">
       <div className="content flex justify-start">
-        <div className="text w-[40%] py-16 pl-16 relative z-50">
+        <div className="text w-[40%] py-16 pl-16 relative z-40">
           <p className="text-white text-3xl font-extrabold mb-2">
             {details.title}
           </p>
@@ -58,7 +58,7 @@ function MovieWatchCard({ details }) {
             })}
             <span>{new Date(details.release_date).getFullYear()}</span>
           </p>
-          <p className="text-slate-200">{details.overview}</p>
+          <p className="text-slate-200">{details.overview.substring(0, 200)}...</p>
           <div className="mt-10 w-[100%]  flex justify-center items-center absolute bottom-16">
             <WatchNowBtn />
             <MoreBtns />
