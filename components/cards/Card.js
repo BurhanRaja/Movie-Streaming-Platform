@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 function Card({ cardDetail, poster, id, cardGenres }) {
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     if (cardDetail) {
       setLoading(false);
@@ -50,11 +50,9 @@ function CardDetail({ title, description, genres, date, detail }) {
       <div className="title">
         <p className="font-bold mb-1">{title}</p>
         <p className="leading-3 mt-1 text-[0.6rem] font-semibold mb-2">
-          {genres
-            ? genres?.map((el) => {
-                return <span key={el}>{el.name || el} . </span>;
-              })
-            : "No Genres"}
+          {genres ? genres?.map((el) => {
+            return <span key={el}>{el.name || el} . </span>;
+          }) : "No Genres"}
           <span>{date ? date.getFullYear() : "No Date"}</span>
         </p>
       </div>
@@ -62,9 +60,7 @@ function CardDetail({ title, description, genres, date, detail }) {
         className="description mt-1 mb-1 text-slate-500 font-bold"
         style={{ fontSize: "0.6rem" }}
       >
-        <p className="leading-3">
-          {description ? description.substring(0, 55) : "No Description"}...
-        </p>
+        <p className="leading-3">{description ? description.substring(0, 55) : "No Description"}...</p>
       </div>
       <div className="btn mt-1">
         {detail.title ? (

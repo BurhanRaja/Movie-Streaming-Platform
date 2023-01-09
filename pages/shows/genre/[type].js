@@ -33,6 +33,9 @@ function TypeShows({ type, genres }) {
 
     return (
       <Layout>
+        <div className="mt-5 text-3xl">
+          <p className="capitalize">{type}</p>
+        </div>
         <div className="flex items-center justify-start w-[89%] mx-auto flex-wrap">
           {showsData.map((el) => {
             return (
