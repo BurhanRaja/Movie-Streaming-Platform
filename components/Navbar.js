@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { AiOutlineSearch } from "react-icons/ai";
+import Search from "./Search";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const NavItems = () => {
@@ -107,20 +108,6 @@ const NavItems = () => {
   );
 };
 
-const Search = () => (
-  <div className="flex justify-end w-[100%] mx-2">
-    <input
-      type="text"
-      className="border-b-2 focus:border-blue-600 transition-all bg-transparent w-[75%] focus:w-[100%] focus:outline-0 text-gray-200 z-10"
-      name="search"
-      id="search"
-      placeholder="Search"
-    />
-    <button className="pb-2 hover:cursor-default z-0">
-      <AiOutlineSearch className="text-gray-500 ml-[-20px]" />
-    </button>
-  </div>
-);
 
 const SubscribeBtn = () => (
   <button className="bg-blue-600 rounded-md text-white text-xs font-semibold uppercase py-1 px-4 mx-2">
