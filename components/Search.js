@@ -14,7 +14,8 @@ const Search = () => {
                 pathname: "/search",
                 query: {
                     searchquery: searchQuery
-                }
+                },
+                shallow: true
             })
         }
     }

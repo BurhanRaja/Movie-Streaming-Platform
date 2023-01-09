@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 function Card({ cardDetail, poster, id, cardGenres }) {
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     if (cardDetail) {
       setLoading(false);
@@ -24,7 +24,7 @@ function Card({ cardDetail, poster, id, cardGenres }) {
           src={
             poster
               ? `https://image.tmdb.org/t/p/original${poster}`
-              : "/images/disneyhotstar.jgp"
+              : "/images/disneyhotstar.jpg"
           }
           alt="card"
           width={200}
