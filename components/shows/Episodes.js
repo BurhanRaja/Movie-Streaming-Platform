@@ -44,7 +44,7 @@ const CardDetail = ({ description, episodeNo, seasonNo, date }) => {
 const Card = ({ description, episodeNo, seasonNo, date, image }) => {
   return (
     <Link href="/">
-      <div className="card group/card w-[18rem] h-[10.2rem] rounded-lg mr-3 mb-3 mt-3 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer">
+      <div className="card group/card md:w-[18rem] md:h-[10.2rem] min-[360px]:w-[12rem] min-[360px]:h-[7rem] rounded-lg mr-3 mb-3 mt-3 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer">
         <Image
           src={
             image

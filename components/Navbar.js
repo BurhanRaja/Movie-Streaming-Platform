@@ -3,6 +3,7 @@ import Link from "next/link";
 import Search from "./Search";
 
 import { GiHamburgerMenu } from "react-icons/gi";
+import Menu from "./Menu";
 
 const NavItems = () => {
   let navItems = [
@@ -70,7 +71,7 @@ const NavItems = () => {
   ];
 
   return (
-    <ul className="flex justify-center items-center text-white text-base ">
+    <ul className="flex justify-center items-center text-white text-base xl:flex md:hidden min-[360px]:hidden">
       {navItems?.map((el) => {
         if (el.item === "Disney+") {
           return (
@@ -110,7 +111,7 @@ const NavItems = () => {
 
 
 const SubscribeBtn = () => (
-  <button className="bg-blue-600 rounded-md text-white text-xs font-semibold uppercase py-1 px-4 mx-2">
+  <button className="bg-blue-600 rounded-md text-white text-xs lg:font-semibold uppercase py-1 lg:px-4 mx-2 md:block min-[360px]:hidden">
     Subscribe
   </button>
 );
@@ -123,18 +124,19 @@ function Navbar() {
   return (
     <header className="font-roboto">
       <nav className="bg-slate-900 p-4 flex justify-between items-center">
-        <div className="left ml-7 flex justify-start items-center">
+        <div className="left lg:ml-7 flex justify-start items-center md:ml-4 sm:2">
           <span className="mx-2">
-            <GiHamburgerMenu className="hover:cursor-pointer text-xl text-white" />
+            <GiHamburgerMenu className="hover:cursor-pointer text-xl text-white lg:block md:hidden sm:hidden min-[360px]:hidden" />
+            <Menu />
           </span>
-          <span className="mx-3 pb-3">
+          <span className="mx-3 pb-3 md:block sm:hidden min-[360px]:hidden">
             <Link href="/">
               <Image src="/logo.svg" width={120} height={120} alt="Logo" />
             </Link>
           </span>
           <NavItems />
         </div>
-        <div className="right mr-7 flex justify-end items-center w-[33%]">
+        <div className="right mr-7 flex justify-end items-center xl:w-[33%] lg:w-[40%] md:w-[50%] sm:w[55%]">
           <Search />
           <SubscribeBtn />
           <LoginBtn />

@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 function Card({ cardDetail, poster, id, cardGenres }) {
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     if (cardDetail) {
       setLoading(false);
@@ -19,7 +19,7 @@ function Card({ cardDetail, poster, id, cardGenres }) {
     <CardLoading />
   ) : (
     <Link href={cardDetail.release_date ? `/movies/${id}` : `/shows/${id}`}>
-      <div className="card group/card w-[9.5rem] h-[100%] rounded-lg mr-4 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer">
+      <div className="card group/card md:w-[9.5rem] min-[360px]:w-[6rem] md:h-[100%] min-[360px]:h-[60%] rounded-lg mr-4 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer">
         <Image
           src={
             poster
@@ -50,9 +50,11 @@ function CardDetail({ title, description, genres, date, detail }) {
       <div className="title">
         <p className="font-bold mb-1">{title}</p>
         <p className="leading-3 mt-1 text-[0.6rem] font-semibold mb-2">
-          {genres ? genres?.map((el) => {
-            return <span key={el}>{el.name || el} . </span>;
-          }) : "No Genres"}
+          {genres
+            ? genres?.map((el) => {
+                return <span key={el}>{el.name || el} . </span>;
+              })
+            : "No Genres"}
           <span>{date ? date.getFullYear() : "No Date"}</span>
         </p>
       </div>
@@ -60,7 +62,9 @@ function CardDetail({ title, description, genres, date, detail }) {
         className="description mt-1 mb-1 text-slate-500 font-bold"
         style={{ fontSize: "0.6rem" }}
       >
-        <p className="leading-3">{description ? description.substring(0, 55) : "No Description"}...</p>
+        <p className="leading-3">
+          {description ? description.substring(0, 55) : "No Description"}...
+        </p>
       </div>
       <div className="btn mt-1">
         {detail.title ? (

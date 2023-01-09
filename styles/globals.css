@@ -128,3 +128,8 @@ body {
     rgba(102, 102, 102, 0.068) 100%
   );
 }
+
+
+.ham-nav {
+    background-color: rgb(15, 25, 48);
+}

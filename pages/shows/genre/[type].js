@@ -33,7 +33,7 @@ function TypeShows({ type, genres }) {
 
     return (
       <Layout>
-        <div className="flex items-center justify-start w-[93%] mx-auto flex-wrap">
+        <div className="flex items-center justify-start w-[89%] mx-auto flex-wrap">
           {showsData.map((el) => {
             return (
               <div className="mt-4 mb-4 mx-4" key={el.id}>

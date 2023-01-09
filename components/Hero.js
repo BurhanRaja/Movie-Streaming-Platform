@@ -14,11 +14,11 @@ function HeroCard({ id, title, description, image, genres, date, link }) {
 
   return (
     <Link href={link}>
-      <div className="hero-card to-transparent w-[93%] h-[100%] rounded-lg mx-auto">
-        <div className="content flex justify-start">
-          <div className="text w-[46%] py-16 pl-16">
-            <p className="text-white text-3xl font-extrabold mb-2">{title}</p>
-            <p className="text-slate-400 font-semibold mb-2 text-lg">
+      <div className="hero-card to-transparent w-[93%] rounded-lg mx-auto relative hover:cursor-pointer md:w-[93%] min-[360px]:w-[100%]">
+        <div className="content flex lg:static sm:relative min-[360px]:relative">
+          <div className="text w-[50%] py-16 pl-16 relative z-40 lg:relative sm:absolute min-[360px]:absolute sm:left-0 sm:py-8 md:w-[50%] min-[360px]:py-4 min-[360px]:w-[70%]">
+            <p className="text-white xl:text-3xl font-extrabold mb-2 lg:text-xl md:text-xl sm:text-lg min-[360px]:text-sm">{title}</p>
+            <p className="text-slate-400 font-semibold mb-2 xl:text-lg lg:text-base sm:text-xs min-[360px]:text-xs">
               {genres?.map((el) => {
                   return (
                     <span key={el}>{el} . </span>
@@ -26,17 +26,17 @@ function HeroCard({ id, title, description, image, genres, date, link }) {
               })}
                 <span>{date.getFullYear()}</span>
             </p>
-            <p className="text-slate-200">{description.substr(0, 210)}...</p>
+            <p className="text-slate-200 xl:text-lg lg:text-base lg:block md:text-xs min-[360px]:text-xs">{description.substr(0, 200)}...</p>
           </div>
-          <div className="image w-40% z-10 relative">
+          <div className="image z-10 relative 2xl:w-[50%] lg:w-[80%] md:w-[100%]">
             <Image
               src={image ? `https://image.tmdb.org/t/p/original${image}` : "/images/logo.webp"}
-              className="rounded-lg"
+              className="rounded-lg w-[100%]"
               width={765}
               height={100}
               alt="img"
             />
-            <div className="absolute top-0 right-0 bottom-0 left-0 w-[100%] h-[100%] overflow-hidden image-gradient"></div>
+            <div className="absolute top-0 right-0 bottom-0 left-0 w-[100%] h-[100%] overflow-hidden moviedetail-image-gradient md:block sm:hidden"></div>
           </div>
         </div>
       </div>
@@ -74,7 +74,8 @@ function Hero({ data, genres }) {
           depth: 5,
           modifier: 1,
         }}
-        style={{ perspective: "17px", width: "100%", height: "25rem" }}
+        style={{ perspective: "17px", width: "100%" }}
+        className="lg:h-[25rem] "
       >
         {data?.map((el, index) => {
           if (index <= 9) {
