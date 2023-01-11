@@ -9,7 +9,7 @@ function SwiperSlider({ children, countCard }) {
     <Swiper
       modules={[FreeMode, Mousewheel, Keyboard]}
       slidesPerView={countCard}
-      spaceBetween={countCard === 4 ? 20 : 30}
+      spaceBetween={countCard <= 4 ? 20 : 30}
       scrollbar={true}
       mousewheel={true}
       keyboard={true}

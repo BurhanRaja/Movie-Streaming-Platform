@@ -26,7 +26,7 @@ function Extras({ id, type }) {
             Trailers and Extras
           </p>
         </div>
-        <SwiperSlider countCard={3}>
+        <SwiperSlider countCard={2}>
           {data.results === [] ? (
             <div className="w-[93%] mx-auto">
               <h2 className=" text-red-500 ">No Recommendations</h2>
