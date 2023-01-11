@@ -1,31 +1,63 @@
+import Head from "next/head";
 import useSWRInfinite from "swr/infinite";
 import Card from "../../../components/cards/Card";
 import Layout from "../../../components/Layout";
 import { getGenreMovie } from "../../../services/genres";
 
 function LangMovies({ lang, genres }) {
-  const getMovies = (url) => fetch(url).then((res) => res.json()).then((res) => res.results);
+  const getMovies = (url) =>
+    fetch(url)
+      .then((res) => res.json())
+      .then((res) => res.results);
 
-  const { data: movies, error, size, setSize } = useSWRInfinite(
+  const {
+    data: movies,
+    error,
+    size,
+    setSize,
+  } = useSWRInfinite(
     (index) =>
       `${process.env.NEXT_PUBLIC_URL}discover/movie?api_key=${
         process.env.NEXT_PUBLIC_API_KEY
       }&language=en-US&sort_by=release_date.desc&include_adult=false&include_video=false&page=${
         index + 1
-      }&with_original_language=${lang}&with_watch_providers=${lang === "ko" || lang === "ja" ? "" : "122"}&watch_region=IN&with_watch_monetization_types=flatrate`,
+      }&with_original_language=${lang}&with_watch_providers=${
+        lang === "ko" || lang === "ja" ? "" : "122"
+      }&watch_region=IN&with_watch_monetization_types=flatrate`,
     getMovies
   );
 
   if (error) console.log(error);
 
   if (movies) {
-
     const moviesData = movies ? movies?.flat() : [];
 
     return (
       <Layout>
+        <Head>
+          <title>
+            {lang === "hi"
+              ? "Hindi"
+              : lang === "ko"
+              ? "Korean"
+              : lang === "ja"
+              ? "Japanese"
+              : "English"}{" "}
+            Movies
+          </title>
+          <link rel="icon" type="image/x-icon" href="/images/logo.jpg"></link>
+        </Head>
         <div className="mt-5 text-3xl w-[87%] mx-auto my-5">
-          <p className="capitalize text-white font-bold">{lang === "hi" ? "hindi" : lang === "ko" ? "korean" : lang === "ja" ? "japanese" : "english"} - Movies</p>
+          <p className="capitalize text-white font-bold">
+            {lang === "hi"
+              ? "hindi"
+              : lang === "ko"
+              ? "korean"
+              : lang === "ja"
+              ? "japanese"
+              : "english"}{" "}
+            - Movies
+          </p>
         </div>
         <div className="flex items-center justify-start w-[89%] mx-auto flex-wrap">
           {moviesData.map((el) => {

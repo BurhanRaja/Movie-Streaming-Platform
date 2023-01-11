@@ -13,10 +13,14 @@ import getDisneyNature from "../../services/disney/nature";
 import getDisneyFamily from "../../services/disney/family";
 import getDisneyMusic from "../../services/disney/music";
 import getDisneySciFi from "../../services/disney/scifi";
+import Head from "next/head";
 
 function DisneyPlus({ genres, latest, originals, popular, adventure, learning, nature, family, music, scifi }) {
   return (
     <Layout>
+      <Head>
+        <title>Disney+</title>
+      </Head>
       <Hero data={latest} genres={genres} />
       <CardContainer />
       <div className="mt-12">

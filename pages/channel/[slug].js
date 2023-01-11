@@ -35,6 +35,7 @@ import {
   getAllStarwarsShows,
 } from "../../services/channel/starwars";
 import { getGenreMovie, getGenreShow } from "../../services/genres";
+import Head from "next/head";
 
 function Channel({
   slug,
@@ -65,6 +66,12 @@ function Channel({
 }) {
   return (
     <Layout>
+
+      <Head>
+        <title>{slug.substring(0, 1).toUpperCase() + slug.substring(1)}</title>
+        <link rel="icon" type="image/x-icon" href="/images/logo.jpg"></link>
+      </Head>
+
       <ChannelHero id={slug} />
 
       {/* Disney *********************************************************************** */}

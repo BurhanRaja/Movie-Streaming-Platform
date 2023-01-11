@@ -1,3 +1,4 @@
+import Head from "next/head";
 import useSWR from "swr";
 import MovieDetails from "../../components/movie/MovieDetails";
 import { getGenreMovie } from "../../services/genres";
@@ -16,10 +17,23 @@ function MovieDetail({ id, genreMovie }) {
     getSimilar
   );
 
-  if(movie.error || similar.error) console.log("Some Error Occured");
+  if (movie.error || similar.error) console.log("Some Error Occured");
 
   if (movie.data && similar.data) {
-    return <MovieDetails movie={movie.data} similar={similar.data} genreMovie={genreMovie} id={id} />;
+    return (
+      <>
+      <Head>
+        <title>{movie.data.title}</title>
+        <link rel="icon" type="image/x-icon" href="/images/logo.jpg"></link>
+      </Head>
+        <MovieDetails
+          movie={movie.data}
+          similar={similar.data}
+          genreMovie={genreMovie}
+          id={id}
+        />
+      </>
+    );
   }
 }
 

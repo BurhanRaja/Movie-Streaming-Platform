@@ -14,6 +14,7 @@ import { getPopularMovies, getPopularShows } from "../services/hotstar/popular";
 import getRomanticMovies from "../services/hotstar/romance";
 import { getScifiMovies, getScifiShows } from "../services/hotstar/sci-fi";
 import Hero from "../components/Hero";
+import Head from "next/head";
 
 export default function Home({
   allLatest,
@@ -30,6 +31,10 @@ export default function Home({
 }) {
   return (
     <Layout>
+      <Head>
+        <title>Disney + Hostar</title>
+        <link rel="icon" type="image/x-icon" href="/images/logo.jpg"></link>
+      </Head>
       <main>
         <Hero data={allLatest} genres={genres} />
         <CardSlider data={allLatest} genres={genres} type="Latest & Trending" />

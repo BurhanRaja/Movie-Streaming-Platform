@@ -6,6 +6,7 @@ import Episodes from "../../components/shows/Episodes";
 import TVWatchCard from "../../components/shows/TvWatchCard";
 import SimilarShows from "./SimilarShows";
 import Seasons from "./Seasons";
+import Head from "next/head";
 
 function ShowDetails({ id, genreShow }) {
   const getShow = (url) => fetch(url).then((res) => res.json());
@@ -19,6 +20,9 @@ function ShowDetails({ id, genreShow }) {
   if(data) {
   return (
     <Layout>
+      <Head>
+        <title>{data.name}</title>
+      </Head>
       <TVWatchCard details={data} />
       <Episodes id={id} seasonNo={1} sliderEnable={true} />
       <div className="w-[93%] mx-auto">

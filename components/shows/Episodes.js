@@ -9,6 +9,7 @@ import SwiperSlider from "../SwiperSlider";
 
 import "swiper/css";
 import "swiper/css/free-mode";
+import Head from "next/head";
 
 const CardDetail = ({ description, episodeNo, seasonNo, date }) => {
   return (
@@ -110,6 +111,10 @@ function Episodes({ id, seasonNo, sliderEnable }) {
             </SwiperSlider>
           </div>
         ) : (
+          <>
+          <Head>
+            <title>{data.name}</title>
+          </Head>
           <div className="w-[90%] mx-auto mt-16">
             <div className="">
               <p className="text-4xl font-bold text-white mb-5">{data.name}</p>
@@ -130,6 +135,7 @@ function Episodes({ id, seasonNo, sliderEnable }) {
               })}
             </div>
           </div>
+          </>
         )}
       </Fragment>
     )

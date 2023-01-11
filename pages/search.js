@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Card from "../components/cards/Card";
 import { getGenreMovie, getGenreShow } from "../services/genres";
 import { useState } from "react";
+import Head from "next/head";
 
 function SearchedKeysDisplay({ searchQuery, genreMovie, genreShow }) {
   const [isShow, setIsShow] = useState(false);
@@ -14,6 +15,9 @@ function SearchedKeysDisplay({ searchQuery, genreMovie, genreShow }) {
 
   return (
     <Layout>
+      <Head>
+        <title>Search - {searchQuery}</title>
+      </Head>
       <div className="w-[93%] mx-auto mt-20">
         <button
           className={`${
