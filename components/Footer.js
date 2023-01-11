@@ -32,7 +32,7 @@ function Footer() {
         </nav>
 
         <div className="" style={{ fontSize: "0.8rem" }}>
-          © 2022 STAR. All Rights Reserved. HBO, Home Box Office and all related
+          © 2023 STAR. All Rights Reserved. HBO, Home Box Office and all related
           channel and programming logos are service marks of, and all related
           programming visuals and elements are the property of, Home Box Office,
           Inc. All rights reserved.

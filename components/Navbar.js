@@ -89,16 +89,17 @@ const NavItems = () => {
             className="text-gray-300 px-4 hover:cursor-pointer relative group/item-1 py-4"
           >
             <a>{el.item}</a>
-            <ul className="absolute z-50 top-12 left-0 bg-slate-800 rounded-md opacity-0 translate-y-6 group-hover/item-1:opacity-100 group-hover/item-1:translate-y-0 transition-all duration-500">
+            <ul className="absolute z-50 top-12 left-0 bg-slate-800 rounded-md opacity-0 hidden translate-y-6 group-hover/item-1:block group-hover/item-1:opacity-100 group-hover/item-1:translate-y-0 transition-all duration-500">
               {el.dropItems &&
                 el.dropItems?.map((item) => {
                   return (
+                    <Link href={item.link} key={item.name}>
                     <li
-                      key={item.name}
                       className="w-auto hover:bg-black p-2 rounded-sm px-4 block"
                     >
-                      <Link href={item.link}>{item.name}</Link>
+                      {item.name}
                     </li>
+                    </Link>
                   );
                 })}
             </ul>

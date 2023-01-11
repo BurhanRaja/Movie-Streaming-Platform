@@ -3,8 +3,6 @@ import Layout from "../../../components/Layout";
 import Card from "../../../components/cards/Card";
 import { getGenreShow } from "../../../services/genres";
 
-// type === "action" ? 10759 : type === "drama" ? 18 : type === "comedy" ? 35 : type === "family" ? 10751 : type === "mystery" ? 9648 : type === "documentary" ? 99 : type="scifi" ? 10765 : 37
-
 function TypeShows({ type, genres }) {
   const getMovies = (url) =>
     fetch(url)
@@ -33,8 +31,8 @@ function TypeShows({ type, genres }) {
 
     return (
       <Layout>
-        <div className="mt-5 text-3xl">
-          <p className="capitalize">{type}</p>
+        <div className="mt-5 text-3xl w-[87%] mx-auto my-5">
+          <p className="capitalize text-white font-bold">{type === "10759" ? "action" : type === "18" ? "drama" : type === "35" ? "comedy" : type === "10751" ? "family" : type === "9648" ? "mystery" : type === "99" ? "documentary" : type= "10765" ? "scifi" : "37"} - Shows</p>
         </div>
         <div className="flex items-center justify-start w-[89%] mx-auto flex-wrap">
           {showsData.map((el) => {

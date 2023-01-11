@@ -17,6 +17,7 @@ function Extras({ id, type }) {
   if (error) console.log(error);
 
   if (data) {
+    console.log(data);
     return (
       <div className="w-[93%] mx-auto">
         <div className="">
@@ -24,8 +25,8 @@ function Extras({ id, type }) {
             Trailers and Extras
           </p>
         </div>
-        {data.results === [] ? (
-          <div className="w-[93%] mx-auto">
+        {data.results.length === 0 ? (
+          <div className="">
             <h2 className=" text-red-500 ">No Recommendations</h2>
           </div>
         ) : (

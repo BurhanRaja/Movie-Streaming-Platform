@@ -24,6 +24,9 @@ function LangMovies({ lang, genres }) {
 
     return (
       <Layout>
+        <div className="mt-5 text-3xl w-[87%] mx-auto my-5">
+          <p className="capitalize text-white font-bold">{lang === "hi" ? "hindi" : lang === "ko" ? "korean" : lang === "ja" ? "japanese" : "english"} - Movies</p>
+        </div>
         <div className="flex items-center justify-start w-[89%] mx-auto flex-wrap">
           {moviesData.map((el) => {
             return (
