@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 
 function Card({ cardDetail, poster, id, cardGenres }) {
   const [loading, setLoading] = useState(true);
+
+  // console.log(cardGenres);
   
   useEffect(() => {
     if (cardDetail) {

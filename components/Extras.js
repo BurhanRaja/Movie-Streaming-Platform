@@ -35,7 +35,7 @@ function Extras({ id, type }) {
             data.results?.map((el) => {
               if (el.site === "YouTube") {
                 return (
-                  <SwiperSlide key={el.id} style={{ width: "30%" }}>
+                  <SwiperSlide key={el.id} style={{ width: "35%" }}>
                     <iframe
                       className="mr-4 rounded-md lg:w-[28rem] lg:h-[15rem] md:w-[20rem] md:h-[10rem] sm:w-[15rem]"
                       src={`https://www.youtube.com/embed/${el.key}`}

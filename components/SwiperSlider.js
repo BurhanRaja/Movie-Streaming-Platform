@@ -57,23 +57,6 @@ function SwiperSlider({ children, countCard }) {
           360: {
             slidesPerView: 1,
           },
-        }) ||
-        (countCard === 3 && {
-          1200: {
-            slidesPerView: 3,
-          },
-          820: {
-            slidesPerView: 2,
-          },
-          550: {
-            slidesPerView: 2,
-          },
-          400: {
-            slidesPerView: 1,
-          },
-          360: {
-            slidesPerView: 1,
-          },
         })
       }
       style={{

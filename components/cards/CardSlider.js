@@ -18,10 +18,12 @@ function CardSlider({ data, genres, type }) {
                   cardDetail={el}
                   poster={el.poster_path}
                   id={el.id}
-                  cardGenres={el.genre_ids?.map((el) => {
+                  cardGenres={el.genres ? el.genre_ids?.map((el) => {
                     let sameGenre = genres?.find((elem) => elem.id === el);
-                    return sameGenre.name;
-                  })}
+                    if (sameGenre !== undefined) {
+                      return sameGenre.name;
+                    }
+                  }) : []}
                 />
               </SwiperSlide>
             );
