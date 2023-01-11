@@ -47,8 +47,10 @@ const Card = ({ description, episodeNo, seasonNo, date, image }) => {
       <div className="card group/card md:w-[18rem] md:h-[10.2rem] min-[360px]:w-[12rem] min-[360px]:h-[7rem] rounded-lg mr-3 mb-3 mt-3 relative transition-all duration-500 z-10 hover:z-20 hover:cursor-pointer">
         <Image
           src={
-            new Date(date).getTime() < new Date().getTime() || image
+            image
               ? `https://image.tmdb.org/t/p/original${image}`
+              : new Date(date).getTime() > new Date().getTime()
+              ? "/images/coming-soon.jpg"
               : "/images/coming-soon.jpg"
           }
           alt="card"

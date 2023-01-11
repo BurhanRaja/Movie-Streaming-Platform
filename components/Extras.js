@@ -7,7 +7,6 @@ import useSWR from "swr";
 import SwiperSlider from "./SwiperSlider";
 
 function Extras({ id, type }) {
-  
   const getExtras = (url) => fetch(url).then((res) => res.json());
 
   const { data, error } = useSWR(
@@ -18,7 +17,6 @@ function Extras({ id, type }) {
   if (error) console.log(error);
 
   if (data) {
-    console.log(data)
     return (
       <div className="w-[93%] mx-auto">
         <div className="">
@@ -26,13 +24,13 @@ function Extras({ id, type }) {
             Trailers and Extras
           </p>
         </div>
-        <SwiperSlider countCard={2}>
-          {data.results === [] ? (
-            <div className="w-[93%] mx-auto">
-              <h2 className=" text-red-500 ">No Recommendations</h2>
-            </div>
-          ) : (
-            data.results?.map((el) => {
+        {data.results === [] ? (
+          <div className="w-[93%] mx-auto">
+            <h2 className=" text-red-500 ">No Recommendations</h2>
+          </div>
+        ) : (
+          <SwiperSlider countCard={2}>
+            {data.results?.map((el) => {
               if (el.site === "YouTube") {
                 return (
                   <SwiperSlide key={el.id} style={{ width: "35%" }}>
@@ -47,9 +45,9 @@ function Extras({ id, type }) {
                   </SwiperSlide>
                 );
               }
-            })
-          )}
-        </SwiperSlider>
+            })}
+          </SwiperSlider>
+        )}
       </div>
     );
   }
