@@ -1,34 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Disney+ Hotstar Clone
 
-## Getting Started
+## Description
 
-First, run the development server:
+#### What is project?
+- This project is a clone of a very famous OTT platform in India. I have tried to create a very detailed clone of the platform. I have used Next.js for the developing the clone of this platform. I have used libraries like [SWR](https://swr.vercel.app/), [Swiperjs](https://swiperjs.com/) and [Sharp](https://www.npmjs.com/package/sharp). I have used [TMDB](https://www.themoviedb.org/) for getting data.
 
-```bash
-npm run dev
-# or
-yarn dev
+#### Reason to use certain technology
+- In the project, I have used Next,js because of its ultimate feature, i.e., Server Side Rendering. And also I wanted to understand How Server Side Rendering as a concept. I used SWR library because to use client side for a certain situations like rendering an individual movie/show detail page at the user's demand (Will Improve). I used Swiperjs to create beautiful sliders as you might have seen on the top of the Homepage. I used Sharp because Nextjs recommended it to use for the Image Optimization😅.
+
+#### The problems I faced
+- I spend a lot of time exploring the API. It was hard to get the right endpoints for the API to get certian movies/shows. I faced challenges when rendering Images as they were contantly throwing errors. I faced problems in dynamic routing of the app as it was not possible to define the `ids` of all the movies and shows for in the app.
+
+## Project Setup for Local Development
+
+#### Clone the Repository
+
+```
+git clone https://github.com/BurhanRaja/Disney-Plus-hotstar-Clone.git
+cd Disney-Plus-hotstar-Clone
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Install Dependencies
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
+npm install
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+#### Create your `.env` file and Set it up
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+NEXT_PUBLIC_URL=https://api.themoviedb.org/3/
+NEXT_PULIC_API_KEY=your_api_key_from_tmdb
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
