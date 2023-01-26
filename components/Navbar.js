@@ -2,74 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import Search from "./Search";
 
+import { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Menu from "./Menu";
+import Login from "./auth/Login";
+import navItems from "../utils/navData";
 
+
+// Navitems
 const NavItems = () => {
-  let navItems = [
-    {
-      item: "TV",
-      dropItems: [
-        {
-          name: "Action",
-          link: "/shows/genre/10759"
-        }, 
-        {
-          name: "Drama",
-          link: "/shows/genre/18"
-        }, 
-        {
-          name: "Comedy",
-          link: "/shows/genre/35"
-        }, 
-        {
-          name: "Scifi",
-          link: "/shows/genre/10765"
-        }, 
-        {
-          name: "Family",
-          link: "/shows/genre/10751"
-        }, 
-        {
-          name: "Mystery",
-          link: "/shows/genre/9648"
-        },
-        {
-          name: "Documentary",
-          link: "/shows/genre/99"
-        }
-      ],
-    },
-    {
-      item: "Movies",
-      dropItems: [
-        {
-          name: "Hindi",
-          link: "/movies/lang/hi"
-        },
-        {
-          name: "English",
-          link: "/movies/lang/en"
-        },
-        {
-          name: "Korean",
-          link: "/movies/lang/ko"
-        },
-        {
-          name: "Japanese",
-          link: "/movies/lang/ja"
-        },],
-    },
-    {
-      item: "Sports",
-      dropItems: [],
-    },
-    {
-      item: "Disney+",
-      dropItems: [],
-    },
-  ];
-
   return (
     <ul className="flex justify-center items-center text-white text-base xl:flex md:hidden min-[360px]:hidden">
       {navItems?.map((el) => {
@@ -94,11 +35,9 @@ const NavItems = () => {
                 el.dropItems?.map((item) => {
                   return (
                     <Link href={item.link} key={item.name}>
-                    <li
-                      className="w-auto hover:bg-black p-2 rounded-sm px-4 block"
-                    >
-                      {item.name}
-                    </li>
+                      <li className="w-auto hover:bg-black p-2 rounded-sm px-4 block">
+                        {item.name}
+                      </li>
                     </Link>
                   );
                 })}
@@ -110,24 +49,69 @@ const NavItems = () => {
   );
 };
 
-
+// Subscribe
 const SubscribeBtn = () => (
   <button className="bg-blue-600 rounded-md text-white text-xs lg:font-semibold uppercase py-1 lg:px-4 mx-2 md:block min-[360px]:hidden">
     Subscribe
   </button>
 );
 
-const LoginBtn = () => (
-  <button className="text-gray-200 mx-2 uppercase text-sm">Login</button>
+// Login
+const LoginBtn = ({ setToggle }) => (
+  <button
+    className="text-gray-200 mx-2 uppercase text-sm"
+    onClick={() => setToggle(true)}
+  >
+    Login
+  </button>
 );
 
+// Watchlist
+const WatchListBtn = () => (
+  <button className="rounded-md text-white text-xs lg:font-semibold uppercase py-1 lg:px-4 mx-2 md:block min-[360px]:hidden">
+    Watchlist
+  </button>
+);
+
+// LogOut
+const LogOutBtn = ({ setLogOut }) => (
+  <button className="text-gray-200 mx-2 uppercase text-sm" onClick={setLogOut}>
+    Logout
+  </button>
+);
+
+// Main Navbar
 function Navbar() {
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [checkToken, setCheckToken] = useState(false);
+
+  // To close the login modal
+  const close = (val) => {
+    setLoginOpen(val);
+  };
+
+  // To check if token exists
+  const handleCheckToken = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setCheckToken(true);
+    }
+  };
+
+  useEffect(() => {
+    handleCheckToken();
+  });
+
+  const handleLogOut = () => {
+    setCheckToken(false);
+    localStorage.removeItem("token");
+  };
+
   return (
-    <header className="font-roboto">
+    <header className="font-roboto fixed w-[100%]" style={{ zIndex: "80" }}>
       <nav className="bg-slate-900 p-4 flex justify-between items-center">
         <div className="left lg:ml-7 flex justify-start items-center md:ml-4 sm:2">
           <span className="mx-2">
-            <GiHamburgerMenu className="hover:cursor-pointer text-xl text-white lg:block md:hidden sm:hidden min-[360px]:hidden" />
             <Menu />
           </span>
           <span className="mx-3 pb-3 md:block sm:hidden min-[360px]:hidden">
@@ -139,10 +123,20 @@ function Navbar() {
         </div>
         <div className="right mr-7 flex justify-end items-center xl:w-[33%] lg:w-[40%] md:w-[50%] sm:w[55%]">
           <Search />
-          <SubscribeBtn />
-          <LoginBtn />
+          {checkToken ? (
+            <>
+              <WatchListBtn />
+              <LogOutBtn setLogOut={handleLogOut} />
+            </>
+          ) : (
+            <>
+              <SubscribeBtn />
+              <LoginBtn setToggle={(val) => setLoginOpen(val)} />
+            </>
+          )}
         </div>
       </nav>
+      {loginOpen && <Login setClose={(val) => close(val)} />}
     </header>
   );
 }

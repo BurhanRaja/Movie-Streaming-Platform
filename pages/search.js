@@ -83,7 +83,7 @@ const SearchMovies = ({ query, genres }) => {
     const moviesData = movies ? movies?.flat() : [];
     return (
       <div className="flex items-center justify-start w-[93%] mx-auto flex-wrap">
-        {moviesData.map((el) => {
+        {moviesData.length > 0 ? moviesData.map((el) => {
           return (
             <div className="mt-4 mb-4 mx-4" key={el.id}>
               <Card
@@ -97,7 +97,7 @@ const SearchMovies = ({ query, genres }) => {
               />
             </div>
           );
-        })}
+        }) : <h2 className=" text-red-500 ">No Movies Found</h2>}
         <div className="w-[93%]">
           <button
             className="p-2 mt-4 mb-4 rounded-md w-[100%] bg-slate-900 text-slate-300 border-2 border-slate-300"
@@ -137,7 +137,7 @@ const SearchShows = ({ query, genres }) => {
 
     return (
       <div className="flex items-center justify-start w-[93%] mx-auto flex-wrap">
-        {showsData.map((el) => {
+        {showsData.length > 0 ? showsData.map((el) => {
           return (
             <div className="mt-4 mb-4 mx-4" key={el.id}>
               <Card
@@ -151,7 +151,7 @@ const SearchShows = ({ query, genres }) => {
               />
             </div>
           );
-        })}
+        }) : <h2 className=" text-red-500 ">No Shows Found</h2>}
         <div className="w-[93%]">
           <button
             className="p-2 mt-4 mb-4 rounded-md w-[100%] bg-slate-900 text-slate-300 border-2 border-slate-300"

@@ -8,6 +8,26 @@ body {
   @apply bg-slate-900;
 }
 
+.login-input {
+  position: relative;
+  -moz-appearance: textfield;
+}
+
+.login-input::before {
+  content: "+91";
+  position: absolute;
+  color: white;
+  left: 0;
+  bottom: 1.1rem;
+  height: 24px;
+  width: 24px;
+}
+
+.login-form input::-webkit-outer-spin-button, .login-form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 
 .image-gradient {
   background: linear-gradient(

@@ -25,7 +25,7 @@ function ShowDetails({ id, genreShow }) {
       </Head>
       <TVWatchCard details={data} />
       <Episodes id={id} seasonNo={1} sliderEnable={true} />
-      <div className="w-[93%] mx-auto">
+      <div className="w-[95%] mx-auto">
           <p className="text-2xl font-bold text-white mb-6 mt-6">Seasons</p>
         </div>
       <div className="flex items-center justify-start w-[93%] mx-auto flex-wrap">

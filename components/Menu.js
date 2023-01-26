@@ -3,65 +3,9 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
 import Link from "next/link";
 import Image from "next/image";
+import menuItems from "../utils/menuData";
 
 function Menu() {
-  let navItems = [
-    {
-      item: "TV",
-      dropItems: [
-        {
-          name: "Action",
-          link: "/shows/genre/10759",
-        },
-        {
-          name: "Drama",
-          link: "/shows/genre/18",
-        },
-        {
-          name: "Comedy",
-          link: "/shows/genre/35",
-        },
-        {
-          name: "Scifi",
-          link: "/shows/genre/10765",
-        },
-        {
-          name: "Family",
-          link: "/shows/genre/10751",
-        },
-        {
-          name: "Mystery",
-          link: "/shows/genre/9648",
-        },
-        {
-          name: "Documentary",
-          link: "/shows/genre/99",
-        },
-      ],
-    },
-    {
-      item: "Movies",
-      dropItems: [
-        {
-          name: "Hindi",
-          link: "/movies/lang/hi",
-        },
-        {
-          name: "English",
-          link: "/movies/lang/en",
-        },
-        {
-          name: "Korean",
-          link: "/movies/lang/ko",
-        },
-        {
-          name: "Japanese",
-          link: "/movies/lang/ja",
-        },
-      ],
-    },
-  ];
-
   const [isShow, setIsShow] = useState(false);
   const [isTvOpen, setIsTvOpen] = useState(false);
   const [isMovieOpen, setIsMovieOpen] = useState(false);
@@ -105,7 +49,7 @@ function Menu() {
 
           {/* Items Having drop-items */}
           <ul className="flex flex-col">
-            {navItems?.map((el) => {
+            {menuItems?.map((el) => {
               return (
                 <li
                   key={el.item}
@@ -160,6 +104,11 @@ function Menu() {
             <Link href="/disney">
               <li className="text-gray-300 px-4 hover:cursor-pointer relative group/item-1 py-4 text-center hover:bg-slate-700 rounded-md">
                 Disney+
+              </li>
+            </Link>
+            <Link href="/disney">
+              <li className="text-gray-300 px-4 hover:cursor-pointer relative group/item-1 py-4 text-center hover:bg-slate-700 rounded-md">
+                WatchList
               </li>
             </Link>
           </ul>
