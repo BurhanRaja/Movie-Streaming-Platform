@@ -3,7 +3,7 @@
 ## Description
 
 #### What is project?
-- This project is a clone of a very famous OTT platform in India. I have tried to create a very detailed clone of the platform. I have used Next.js for the developing the clone of this platform. I have used libraries like [SWR](https://swr.vercel.app/), [TailwindCss](https://tailwindcss.com/), [Swiperjs](https://swiperjs.com/) and [Sharp](https://www.npmjs.com/package/sharp). I have used [TMDB](https://www.themoviedb.org/) for getting data.
+- This project is a clone of a very famous Streaming platform in India. I have tried to create a very detailed clone of the platform. I have used Next.js for the developing the clone of this platform. I have used libraries like [SWR](https://swr.vercel.app/), [TailwindCss](https://tailwindcss.com/), [Swiperjs](https://swiperjs.com/) and [Sharp](https://www.npmjs.com/package/sharp). I have used [TMDB](https://www.themoviedb.org/) for getting data.
 
 #### Reason to use certain technology
 - In the project, I have used Next,js because of its ultimate feature, i.e., Server Side Rendering. And also I wanted to understand How Server Side Rendering as a concept. I used SWR library because to use client side for a certain situations like rendering an individual movie/show detail page at the user's demand (Will Improve). I used TailwindCss for styling. I used Swiperjs to create beautiful sliders as you might have seen on the top of the Homepage. I used Sharp because Nextjs recommended it to use for the Image Optimization😅.
