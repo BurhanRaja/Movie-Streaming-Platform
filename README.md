@@ -1,4 +1,4 @@
-# Disney+ Hotstar Clone
+# Movie Streaming App
 
 ## Description
 
