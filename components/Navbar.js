@@ -3,11 +3,10 @@ import Link from "next/link";
 import Search from "./Search";
 
 import { useEffect, useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
+
+import navItems from "../utils/navData";
 import Menu from "./Menu";
 import Login from "./auth/Login";
-import navItems from "../utils/navData";
-
 
 // Navitems
 const NavItems = () => {
@@ -67,11 +66,15 @@ const LoginBtn = ({ setToggle }) => (
 );
 
 // Watchlist
-const WatchListBtn = () => (
-  <button className="rounded-md text-white text-xs lg:font-semibold uppercase py-1 lg:px-4 mx-2 md:block min-[360px]:hidden">
-    Watchlist
-  </button>
-);
+const WatchListBtn = () => {
+  return (
+    <Link href="/watchlist">
+      <button className="rounded-md text-white text-xs lg:font-semibold uppercase py-1 lg:px-4 mx-2 md:block min-[360px]:hidden">
+        Watchlist
+      </button>
+    </Link>
+  );
+};
 
 // LogOut
 const LogOutBtn = ({ setLogOut }) => (

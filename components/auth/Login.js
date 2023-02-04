@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { v4 as uuid } from "uuid";
 
+
 function Login({ setClose }) {
+  let PHONE_CHECK = /^[0-9]{1,10}$/;
   const [num, setNum] = useState("");
   const [err, setErr] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (num.split("").length === 10) {
+    if (PHONE_CHECK.test(num)) {
       setErr(false);
       localStorage.setItem("token", uuid());
       setClose(false);
@@ -17,6 +18,15 @@ function Login({ setClose }) {
       setErr(true);
     }
   };
+
+  useEffect(() => {
+    if (err) {
+      let timer = setTimeout(() => {
+        setErr(false);
+      }, 2000)
+      return () => clearTimeout(timer);
+    }
+  }, [err])
 
   return (
     <>

@@ -51,7 +51,7 @@ function CardDetail({ title, description, genres, date, detail }) {
   const [message, setMessage, showAlert, setShowAlert] =
     useContext(AlertContext);
 
-    // Removing from WatchList
+  // Removing from WatchList
   const handleRemove = async () => {
     let item = await JSON.parse(localStorage.getItem("data"));
     let itemId = await JSON.parse(localStorage.getItem("idData"));
@@ -74,7 +74,7 @@ function CardDetail({ title, description, genres, date, detail }) {
     }
   };
 
-  // Alert 
+  // Alert
   const AlertDisplay = (message) => {
     setShowAlert(true);
     setMessage(message);
@@ -121,7 +121,6 @@ function CardDetail({ title, description, genres, date, detail }) {
       handleWatchListAdded(itemId);
     }
   }, [detail]);
-
 
   // Adding to WatchList
   const handleAdded = () => {
