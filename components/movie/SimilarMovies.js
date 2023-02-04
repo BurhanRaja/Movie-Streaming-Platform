@@ -1,11 +1,9 @@
-import React from "react";
-import CardSlider from "../cards/CardSlider";
+import CardSlider from "../../components/cards/CardSlider";
 
-function SimilarShows({ genreShow, similar }) {
-
-    return (
-      <div className="mt-12">
-        {similar.total_pages === 0 || !similar ? (
+function SimilarMovies({similar, genreMovie}) {
+  return (
+    <>
+     {similar.total_pages === 0 || !similar ? (
           <div className="w-[93%] mx-auto">
             <p className="card-slider-title text-2xl text-white mb-5 font-bold">
               More Like this
@@ -15,12 +13,12 @@ function SimilarShows({ genreShow, similar }) {
         ) : (
           <CardSlider
             data={similar.results}
-            genres={genreShow.genres}
+            genres={genreMovie.genres}
             type="More like this"
           />
-        )}
-      </div>
-    );
-  }
+        )} 
+    </>
+  )
+}
 
-export default SimilarShows;
+export default SimilarMovies

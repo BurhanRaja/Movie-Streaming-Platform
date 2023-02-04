@@ -51,11 +51,47 @@ function CardDetail({ title, description, genres, date, detail }) {
   const [message, setMessage, showAlert, setShowAlert] =
     useContext(AlertContext);
 
+    // Removing from WatchList
+  const handleRemove = async () => {
+    let item = await JSON.parse(localStorage.getItem("data"));
+    let itemId = await JSON.parse(localStorage.getItem("idData"));
+
+    item = item?.filter((el) => el.id !== detail.id);
+    itemId = itemId?.filter((el) => el !== detail.id);
+
+    let token = localStorage.getItem("token");
+
+    localStorage.removeItem("data");
+    localStorage.removeItem("idData");
+    localStorage.setItem("data", item && JSON.stringify([...item]));
+    localStorage.setItem("idData", itemId && JSON.stringify([...itemId]));
+
+    if (token) {
+      setAdded(false);
+      AlertDisplay("Added to Watchlist");
+    } else {
+      AlertDisplay("Please Login");
+    }
+  };
+
+  // Alert 
+  const AlertDisplay = (message) => {
+    setShowAlert(true);
+    setMessage(message);
+  };
+
+  // Add Item to Watchlist
   useEffect(() => {
     let item = JSON.parse(localStorage.getItem("data"));
     let itemId = JSON.parse(localStorage.getItem("idData"));
+    let token = localStorage.getItem("token");
 
-    if (added && !item?.includes(detail) && !itemId?.includes(detail.id)) {
+    if (
+      added &&
+      !item?.includes(detail) &&
+      !itemId?.includes(detail.id) &&
+      token
+    ) {
       localStorage.removeItem("data");
       localStorage.removeItem("idData");
       localStorage.setItem(
@@ -68,17 +104,10 @@ function CardDetail({ title, description, genres, date, detail }) {
           ? JSON.stringify([...itemId, detail.id])
           : JSON.stringify([detail.id])
       );
-    } else {
-        item = item?.filter((el) => el.id === detail.id);
-        itemId = itemId?.filter((el) => el === detail.id);
-
-        localStorage.removeItem("data");
-        localStorage.removeItem("idData");
-        localStorage.setItem("data", item && JSON.stringify([...item]));
-        localStorage.setItem("idData", itemId && JSON.stringify([...itemId]));
     }
   }, [added, detail]);
 
+  // setAdded to true when reload
   useEffect(() => {
     let itemId = JSON.parse(localStorage.getItem("idData"));
     const handleWatchListAdded = (arr) => {
@@ -93,24 +122,16 @@ function CardDetail({ title, description, genres, date, detail }) {
     }
   }, [detail]);
 
+
+  // Adding to WatchList
   const handleAdded = () => {
     let token = localStorage.getItem("token");
 
     if (token) {
       setAdded(true);
-      setShowAlert(true);
-      setMessage("Added to WatchList");
-      console.log(message);
-    }
-  };
-
-  const handleRemove = () => {
-    let token = localStorage.getItem("token");
-
-    if (token) {
-      setAdded(false);
-      setShowAlert(true);
-      setMessage("Removed from Watchlist");
+      AlertDisplay("Added to Watchlist");
+    } else {
+      AlertDisplay("Please Login");
     }
   };
 

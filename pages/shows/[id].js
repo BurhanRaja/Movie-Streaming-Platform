@@ -1,25 +1,21 @@
 import ShowDetails from "../../components/shows/ShowDetails";
+import getShow from "../../services/fetchById/show";
 import { getGenreShow, getGenreMovie } from "../../services/genres";
 
-function ShowDetail({ id, genreShow }) {
-  return <ShowDetails id={id} genreShow={genreShow} />;
+function ShowDetail({ id, genreShow, show, similar, videos }) {
+  return <ShowDetails id={id} genreShow={genreShow} show={show} similar={similar} videos={videos} />;
 }
 
 ShowDetail.getInitialProps = async ({ query }) => {
-  const genreMovie = await getGenreMovie();
   const genreShow = await getGenreShow();
-
-  let genres = [...genreMovie.genres];
-  for (let i = 0; i < genreShow.genres.length; i++) {
-    let same = genres.find((el) => el.id === genreShow.genres[i].id);
-    if (!same) {
-      genres.push(genreShow.genres[i]);
-    }
-  }
+  const {show, similar, videos} = await getShow(query.id)
 
   return {
-    genreShow: genres,
+    genreShow: genreShow,
     id: String(query.id),
+    show,
+    similar,
+    videos
   };
 };
 

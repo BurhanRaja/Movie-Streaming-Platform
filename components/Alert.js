@@ -9,7 +9,7 @@ function Alert() {
     if (showAlert) {
       let timer = setTimeout(() => {
         setShowAlert(false);
-      }, 10000);
+      }, 2000);
       return () => clearTimeout(timer);
     }
 

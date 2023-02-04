@@ -1,43 +1,32 @@
-import React, { useEffect, useState } from "react";
-import useSWR from "swr";
+import Head from "next/head";
+import React from "react";
 import Extras from "../../components/Extras";
 import Layout from "../../components/Layout";
 import Episodes from "../../components/shows/Episodes";
 import TVWatchCard from "../../components/shows/TvWatchCard";
-import SimilarShows from "./SimilarShows";
 import Seasons from "./Seasons";
-import Head from "next/head";
+import SimilarShows from "./SimilarShows";
 
-function ShowDetails({ id, genreShow }) {
-  const getShow = (url) => fetch(url).then((res) => res.json());
-
-  const { data, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_URL}tv/${id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`,
-    getShow
-  );
-
-  if(error) console.log(error);
-  if(data) {
+function ShowDetails({ id, genreShow, show, similar, videos }) {
   return (
     <Layout>
       <Head>
-        <title>{data.name}</title>
+        <title>{show.name}</title>
       </Head>
-      <TVWatchCard details={data} />
+      <TVWatchCard details={show} />
       <Episodes id={id} seasonNo={1} sliderEnable={true} />
       <div className="w-[95%] mx-auto">
-          <p className="text-2xl font-bold text-white mb-6 mt-6">Seasons</p>
-        </div>
+        <p className="text-2xl font-bold text-white mb-6 mt-6">Seasons</p>
+      </div>
       <div className="flex items-center justify-start w-[93%] mx-auto flex-wrap">
-        {[...Array(data.number_of_seasons).keys()].map((el) => {
-            return <Seasons key={el} seasonNo={el} id={id} />
+        {[...Array(show.number_of_seasons).keys()].map((el) => {
+          return <Seasons key={el} seasonNo={el} id={id} />;
         })}
       </div>
-      <Extras id={id} type="tv" />
-      <SimilarShows id={id} genreShow={genreShow} />
+      <Extras videos={videos} />
+      <SimilarShows genreShow={genreShow} similar={similar} />
     </Layout>
   );
-};
 }
 
 export default ShowDetails;
