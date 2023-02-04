@@ -4,13 +4,13 @@ import { v4 as uuid } from "uuid";
 
 
 function Login({ setClose }) {
-  let PHONE_CHECK = /^[0-9]{1,10}$/;
+  let PHONE_CHECK = /^[0-9]{10}$/;
   const [num, setNum] = useState("");
   const [err, setErr] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (PHONE_CHECK.test(num)) {
+    if (PHONE_CHECK.test(Number(num))) {
       setErr(false);
       localStorage.setItem("token", uuid());
       setClose(false);
