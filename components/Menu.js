@@ -1,8 +1,8 @@
+import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
-import Link from "next/link";
-import Image from "next/image";
 import menuItems from "../utils/menuData";
 
 function Menu() {
@@ -37,9 +37,9 @@ function Menu() {
           style={{ zIndex: "100" }}
         >
           <div className="flex justify-between mx-2 my-4">
-            <span className="mr-3 pb-3">
+            <span className="mr-3">
               <Link href="/">
-                <Image src="/logo.svg" width={120} height={120} alt="Logo" />
+              <h3 className="text-xl font-extrabold text-white m-0">STREAM.</h3>
               </Link>
             </span>
             <button className="text-white" onClick={handleClick}>

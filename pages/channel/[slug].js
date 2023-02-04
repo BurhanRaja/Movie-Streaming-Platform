@@ -65,13 +65,7 @@ function Channel({
   allGenres,
 }) {
   return (
-    <Layout>
-
-      <Head>
-        <title>{slug.substring(0, 1).toUpperCase() + slug.substring(1)}</title>
-        <link rel="icon" type="image/x-icon" href="/images/logo.jpg"></link>
-      </Head>
-
+    <Layout head={slug.substring(0, 1).toUpperCase() + slug.substring(1)}>
       <ChannelHero id={slug} />
 
       {/* Disney *********************************************************************** */}

@@ -1,7 +1,6 @@
-import Head from "next/head";
 import useSWRInfinite from "swr/infinite";
-import Card from "../../../components/cards/Card";
 import Layout from "../../../components/Layout";
+import Card from "../../../components/cards/Card";
 import { getGenreMovie } from "../../../services/genres";
 
 function LangMovies({ lang, genres }) {
@@ -33,20 +32,17 @@ function LangMovies({ lang, genres }) {
     const moviesData = movies ? movies?.flat() : [];
 
     return (
-      <Layout>
-        <Head>
-          <title>
-            {lang === "hi"
-              ? "Hindi"
-              : lang === "ko"
-              ? "Korean"
-              : lang === "ja"
-              ? "Japanese"
-              : "English"}{" "}
-            Movies
-          </title>
-          <link rel="icon" type="image/x-icon" href="/images/logo.jpg"></link>
-        </Head>
+      <Layout
+        head={`${
+          lang === "hi"
+            ? "Hindi"
+            : lang === "ko"
+            ? "Korean"
+            : lang === "ja"
+            ? "Japanese"
+            : "English"
+        } Movies`}
+      >
         <div className="mt-5 text-3xl w-[87%] mx-auto my-5">
           <p className="capitalize text-white font-bold">
             {lang === "hi"

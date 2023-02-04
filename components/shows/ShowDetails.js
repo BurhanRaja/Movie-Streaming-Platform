@@ -1,4 +1,3 @@
-import Head from "next/head";
 import React from "react";
 import Extras from "../../components/Extras";
 import Layout from "../../components/Layout";
@@ -9,10 +8,7 @@ import SimilarShows from "./SimilarShows";
 
 function ShowDetails({ id, genreShow, show, similar, videos }) {
   return (
-    <Layout>
-      <Head>
-        <title>{show.name}</title>
-      </Head>
+    <Layout head={show.name}>
       <TVWatchCard details={show} />
       <Episodes id={id} seasonNo={1} sliderEnable={true} />
       <div className="w-[95%] mx-auto">

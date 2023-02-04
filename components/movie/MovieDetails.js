@@ -6,7 +6,7 @@ import SimilarMovies from "../../components/movie/SimilarMovies";
 
 function MovieDetails({ id, movie, similar, genreMovie, videos }) {
   return (
-    <Layout>
+    <Layout head={movie?.title}>
       <MovieWatchCard details={movie} />
       <Extras id={id} type="movie" videos={videos} />
       <div className="mt-12">

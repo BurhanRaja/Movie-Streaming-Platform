@@ -17,10 +17,7 @@ import Head from "next/head";
 
 function DisneyPlus({ genres, latest, originals, popular, adventure, learning, nature, family, music, scifi }) {
   return (
-    <Layout>
-      <Head>
-        <title>Disney+</title>
-      </Head>
+    <Layout head="Disney+">
       <Hero data={latest} genres={genres} />
       <CardContainer />
       <div className="mt-12">

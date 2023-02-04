@@ -2,7 +2,6 @@ import useSWRInfinite from "swr/infinite";
 import Layout from "../../../components/Layout";
 import Card from "../../../components/cards/Card";
 import { getGenreShow } from "../../../services/genres";
-import Head from "next/head";
 
 function TypeShows({ type, genres }) {
   const getMovies = (url) =>
@@ -31,14 +30,40 @@ function TypeShows({ type, genres }) {
     const showsData = shows ? shows?.flat() : [];
 
     return (
-      <Layout>
-        <Head>
-          <title>
-          {type === "10759" ? "Action" : type === "18" ? "Drama" : type === "35" ? "Comedy" : type === "10751" ? "Family" : type === "9648" ? "Mystery" : type === "99" ? "Documentary" : type= "10765" ? "Scifi" : "37"} Shows
-          </title>
-        </Head>
+      <Layout
+        head={`${
+          type === "10759"
+            ? "Action"
+            : type === "18"
+            ? "Drama"
+            : type === "35"
+            ? "Comedy"
+            : type === "10751"
+            ? "Family"
+            : type === "9648"
+            ? "Mystery"
+            : type === "99"
+            ? "Documentary"
+            : (type = "10765" ? "Scifi" : "37")
+        } Shows`}
+      >
         <div className="mt-5 text-3xl w-[87%] mx-auto my-5">
-          <p className="capitalize text-white font-bold">{type === "10759" ? "action" : type === "18" ? "drama" : type === "35" ? "comedy" : type === "10751" ? "family" : type === "9648" ? "mystery" : type === "99" ? "documentary" : type= "10765" ? "scifi" : "37"} - Shows</p>
+          <p className="capitalize text-white font-bold">
+            {type === "10759"
+              ? "action"
+              : type === "18"
+              ? "drama"
+              : type === "35"
+              ? "comedy"
+              : type === "10751"
+              ? "family"
+              : type === "9648"
+              ? "mystery"
+              : type === "99"
+              ? "documentary"
+              : (type = "10765" ? "scifi" : "37")}{" "}
+            - Shows
+          </p>
         </div>
         <div className="flex items-center justify-start w-[89%] mx-auto flex-wrap">
           {showsData.map((el) => {

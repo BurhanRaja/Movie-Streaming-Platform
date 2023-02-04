@@ -30,11 +30,7 @@ export default function Home({
   allDocumentary,
 }) {
   return (
-    <Layout>
-      <Head>
-        <title>Disney + Hostar</title>
-        <link rel="icon" type="image/x-icon" href="/images/logo.jpg"></link>
-      </Head>
+    <Layout head="STREAM.">
       <main>
         <Hero data={allLatest} genres={genres} />
         <CardSlider data={allLatest} genres={genres} type="Latest & Trending" />

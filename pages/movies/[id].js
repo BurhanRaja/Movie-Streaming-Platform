@@ -6,10 +6,6 @@ import getMovie from "../../services/fetchById/movie";
 function MovieDetail({ id, genreMovie, movie, similar, videos }) {
     return (
       <>
-        <Head>
-          <title>{movie?.title}</title>
-          <link rel="icon" type="image/x-icon" href="/images/logo.jpg"></link>
-        </Head>
         <MovieDetails
           movie={movie}
           similar={similar}

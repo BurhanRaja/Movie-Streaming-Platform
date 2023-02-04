@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import Search from "./Search";
 
@@ -117,9 +116,9 @@ function Navbar() {
           <span className="mx-2">
             <Menu />
           </span>
-          <span className="mx-3 pb-3 md:block sm:hidden min-[360px]:hidden">
+          <span className="mx-3 md:block sm:hidden min-[360px]:hidden">
             <Link href="/">
-              <Image src="/logo.svg" width={120} height={120} alt="Logo" />
+              <h3 className="text-xl font-extrabold text-white m-0">STREAM.</h3>
             </Link>
           </span>
           <NavItems />
