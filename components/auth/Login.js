@@ -1,19 +1,25 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { v4 as uuid } from "uuid";
+// import AlertContext from "../../context/alertContext";
 
-
-function Login({ setClose }) {
+function Login({ setToggle }) {
   let PHONE_CHECK = /^[0-9]{10}$/;
   const [num, setNum] = useState("");
   const [err, setErr] = useState(false);
+
+  // const [message, setMessage, showAlert, setShowAlert] =
+  //   useContext(AlertContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (PHONE_CHECK.test(Number(num))) {
       setErr(false);
+      // setShowAlert(true);
+      // setMessage("Successfully Logged in!");
       localStorage.setItem("token", uuid());
-      setClose(false);
+      setToggle(false);
+      setNum("");
     } else {
       setErr(true);
     }
@@ -23,10 +29,10 @@ function Login({ setClose }) {
     if (err) {
       let timer = setTimeout(() => {
         setErr(false);
-      }, 2000)
+      }, 2000);
       return () => clearTimeout(timer);
     }
-  }, [err])
+  }, [err]);
 
   return (
     <>
@@ -38,7 +44,7 @@ function Login({ setClose }) {
           <p className="flex justify-end w-[85%] mx-auto pt-8">
             <button
               className="text-white text-xl"
-              onClick={() => setClose(false)}
+              onClick={() => setToggle(false)}
             >
               <MdClose />
             </button>
@@ -51,13 +57,15 @@ function Login({ setClose }) {
             onSubmit={handleSubmit}
           >
             <div className="login-input">
-            <input
-              type="number"
-              className="w-[100%] my-2 p-2 px-3 pl-10 focus:outline-0 border-b-2 border-blue-600 text-blue-600 bg-transparent"
-              placeholder="Enter Mobile Number"
-              value={num}
-              onChange={(e) => setNum(e.target.value)}
-            />
+              <input
+                type="number"
+                placeholder="Enter Your Mobile Number"
+                value={num}
+                data-testid="number-input"
+                name="num"
+                onChange={(e) => setNum(e.target.value)}
+                className="w-[100%] my-2 p-2 px-3 pl-10 focus:outline-0 border-b-2 border-blue-600 text-blue-600 bg-transparent"
+              />
             </div>
             {err ? (
               <small className="bg-red-200 pl-2 py-1 pr-3 w-[50%] border-red-600 text-red-700 mt-4">
