@@ -48,7 +48,7 @@ function Card({ cardDetail, poster, id, cardGenres }) {
 function CardDetail({ title, description, genres, date, detail }) {
   const [added, setAdded] = useState(false);
 
-  const [message, setMessage, showAlert, setShowAlert] =
+  const {message, setMessage, showAlert, setShowAlert} =
     useContext(AlertContext);
 
   // Removing from WatchList

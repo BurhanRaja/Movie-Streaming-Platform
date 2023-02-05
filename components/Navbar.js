@@ -55,10 +55,10 @@ const SubscribeBtn = () => (
 );
 
 // Login
-const LoginBtn = ({ setToggle }) => (
+const LoginBtn = ({ setClose }) => (
   <button
     className="text-gray-200 mx-2 uppercase text-sm"
-    onClick={() => setToggle(true)}
+    onClick={() => setClose(true)}
   >
     Login
   </button>
@@ -133,12 +133,12 @@ function Navbar() {
           ) : (
             <>
               <SubscribeBtn />
-              <LoginBtn setToggle={(val) => setLoginOpen(val)} />
+              <LoginBtn setClose={(val) => setLoginOpen(val)} />
             </>
           )}
         </div>
       </nav>
-      {loginOpen && <Login setClose={(val) => close(val)} />}
+      {loginOpen && <Login setToggle={(val) => close(val)} />}
     </header>
   );
 }

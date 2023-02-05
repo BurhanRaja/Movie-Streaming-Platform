@@ -7,7 +7,7 @@ const AlertState = ({ children }) => {
 
   return (
     <AlertContext.Provider
-      value={[message, setMessage, showAlert, setShowAlert]}
+      value={{message, setMessage, showAlert, setShowAlert}}
     >
       {children}
     </AlertContext.Provider>

@@ -1,13 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import WatchList from "../components/WatchList";
-import AlertContext from "../context/alertContext";
 import { getGenreMovie, getGenreShow } from "../services/genres";
 import UnAuthorized from "../components/UnAuthorized";
 
 function Watchlist({ genres }) {
-  const [message, setMessage, showAlert, setShowAlert] =
-    useContext(AlertContext);
-
   const [token, setToken] = useState(false);
 
   useEffect(() => {

@@ -1,25 +1,25 @@
 import { useContext, useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { v4 as uuid } from "uuid";
-// import AlertContext from "../../context/alertContext";
+import AlertContext from "../../context/alertContext";
 
 function Login({ setToggle }) {
   let PHONE_CHECK = /^[0-9]{10}$/;
   const [num, setNum] = useState("");
   const [err, setErr] = useState(false);
 
-  // const [message, setMessage, showAlert, setShowAlert] =
-  //   useContext(AlertContext);
+  const {setMessage, setShowAlert} =
+    useContext(AlertContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (PHONE_CHECK.test(Number(num))) {
       setErr(false);
-      // setShowAlert(true);
-      // setMessage("Successfully Logged in!");
-      localStorage.setItem("token", uuid());
       setToggle(false);
       setNum("");
+      setShowAlert(true);
+      setMessage("Successfully Logged in!");
+      localStorage.setItem("token", uuid());
     } else {
       setErr(true);
     }
