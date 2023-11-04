@@ -29,6 +29,7 @@ export default function Home({
   allCrime,
   allDocumentary,
 }) {
+  console.log(allLatest);
   return (
     <Layout head="STREAM.">
       <main>
@@ -114,50 +115,78 @@ export async function getStaticProps() {
   );
   let allLatest = [];
   for (let i = 0; i < 8; i++) {
-    allLatest.push(latestM[i]);
-    allLatest.push(latestS[i]);
+    if (latestM[i]) {
+      allLatest.push(latestM[i]);
+    }
+    if (latestS[i]) {
+      allLatest.push(latestS[i]);
+    }
   }
 
   // ? Drama
   let allDrama = [];
   for (let i = 0; i < 8; i++) {
-    allDrama.push(allDramaM[i]);
-    allDrama.push(allDramaS[i]);
+    if (allDramaM[i]) {
+      allDrama.push(allDramaM[i]);
+    }
+    if (allDramaS[i]) {
+      allDrama.push(allDramaS[i]);
+    }
   }
 
-  // ? Scifi
+  // ? Mystery
   let allMystery = [];
   for (let i = 0; i < 8; i++) {
-    allMystery.push(allMysteryM[i]);
-    allMystery.push(allMysteryS[i]);
+    if (allMysteryM[i]) {
+      allMystery.push(allMysteryM[i]);
+    }
+    if (allMysteryS[i]) {
+      allMystery.push(allMysteryS[i]);
+    }
   }
 
   // ? Scifi
   let allSciFi = [];
   for (let i = 0; i < 8; i++) {
-    allSciFi.push(allScifiM[i]);
-    allSciFi.push(allScifiS[i]);
+    if (allScifiM[i]) {
+      allSciFi.push(allScifiM[i]);
+    }
+    if (allScifiS[i]) {
+      allSciFi.push(allScifiS[i]);
+    }
   }
 
   // ? Comedy
   let allComedy = [];
   for (let i = 0; i < 8; i++) {
-    allComedy.push(comedyM[i]);
-    allComedy.push(comedyS[i]);
+    if (comedyM[i]) {
+      allComedy.push(comedyM[i]);
+    }
+    if (comedyS[i]) {
+      allComedy.push(comedyS[i]);
+    }
   }
 
   // ? Crime
   let allCrime = [];
   for (let i = 0; i < 8; i++) {
-    allCrime.push(crimeM[i]);
-    allCrime.push(crimeS[i]);
+    if (crimeM[i]) {
+      allCrime.push(crimeM[i]);
+    }
+    if (crimeS[i]) {
+      allCrime.push(crimeS[i]);
+    }
   }
 
   // ? Documentary
   let allDocumentary = [];
   for (let i = 0; i < 8; i++) {
-    allDocumentary.push(documentaryM[i]);
-    allDocumentary.push(documentaryS[i]);
+    if (documentaryM[i]) {
+      allDocumentary.push(documentaryM[i]);
+    }
+    if (documentaryS[i]) {
+      allDocumentary.push(documentaryS[i]);
+    }
   }
 
   return {

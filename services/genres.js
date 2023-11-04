@@ -4,6 +4,7 @@ export const getGenreMovie = async () => {
   const response = await fetch(movieGenreUrl);
   // Promise Json
   let genreMovie = await response.json();
+  console.log(genreMovie);
 
   return genreMovie;
 };
